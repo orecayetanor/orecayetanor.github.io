@@ -1,0 +1,314 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Richard Oré Cayetano | Ingeniería y Tecnología</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f9fb;
+            color: #1f2933;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #0b2f4f;
+            color: white;
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            opacity: 0.75;
+        }
+
+        .language {
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 20px;
+            padding: 7px 12px;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+        }
+
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            padding: 70px 6%;
+            background: white;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 4.5rem);
+            color: #0b2f4f;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: normal;
+            color: #3d5568;
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            max-width: 720px;
+            font-size: 1.1rem;
+            color: #536574;
+        }
+
+        .section {
+            padding: 70px 6%;
+        }
+
+        .section h2 {
+            color: #0b2f4f;
+            margin-bottom: 35px;
+            font-size: 2rem;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .project {
+            background: white;
+            border: 1px solid #dce4ea;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .project h3 {
+            color: #0b2f4f;
+            margin-bottom: 10px;
+        }
+
+        .project p {
+            color: #5c6b76;
+        }
+
+        footer {
+            background: #0b2f4f;
+            color: white;
+            text-align: center;
+            padding: 30px 6%;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                gap: 14px;
+            }
+
+            .hero {
+                min-height: 60vh;
+                padding-top: 50px;
+                padding-bottom: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Richard Oré Cayetano</div>
+
+    <nav>
+        <a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a>
+        <a href="#proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a>
+        <a href="#publicaciones" data-es="Publicaciones" data-en="Publications">Publicaciones</a>
+        <a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a>
+
+        <button class="language" id="languageButton">
+            EN
+        </button>
+    </nav>
+</header>
+
+
+<main>
+
+<section class="hero" id="inicio">
+    <div class="hero-content">
+
+        <h1>Richard Oré Cayetano</h1>
+
+        <h2
+            data-es="Ingeniería · Recursos Hídricos · Tecnología"
+            data-en="Engineering · Water Resources · Technology">
+            Ingeniería · Recursos Hídricos · Tecnología
+        </h2>
+
+        <p
+            data-es="Desarrollo de herramientas, publicaciones y soluciones aplicadas a la ingeniería y los recursos hídricos."
+            data-en="Development of tools, publications and applied solutions for engineering and water resources.">
+            Desarrollo de herramientas, publicaciones y soluciones aplicadas
+            a la ingeniería y los recursos hídricos.
+        </p>
+
+    </div>
+</section>
+
+
+<section class="section" id="proyectos">
+
+    <h2
+        data-es="Proyectos"
+        data-en="Projects">
+        Proyectos
+    </h2>
+
+    <div class="projects">
+
+        <article class="project">
+            <h3>HydroROC</h3>
+
+            <p
+                data-es="Plugin para QGIS orientado al análisis hidrológico y al procesamiento de información espacial."
+                data-en="QGIS plugin for hydrological analysis and spatial information processing.">
+                Plugin para QGIS orientado al análisis hidrológico
+                y al procesamiento de información espacial.
+            </p>
+        </article>
+
+
+        <article class="project">
+            <h3>AforROC</h3>
+
+            <p
+                data-es="Aplicación para la medición de caudales mediante aforos por secciones."
+                data-en="Application for river discharge measurement using cross-section gauging.">
+                Aplicación para la medición de caudales mediante
+                aforos por secciones.
+            </p>
+        </article>
+
+
+        <article class="project">
+            <h3>HidroLibro</h3>
+
+            <p
+                data-es="Libros y materiales técnicos relacionados con hidrología, hidráulica y medición de caudales."
+                data-en="Technical books and materials related to hydrology, hydraulics and discharge measurement.">
+                Libros y materiales técnicos relacionados con hidrología,
+                hidráulica y medición de caudales.
+            </p>
+        </article>
+
+    </div>
+</section>
+
+
+<section class="section" id="publicaciones">
+
+    <h2
+        data-es="Publicaciones y recursos"
+        data-en="Publications and resources">
+        Publicaciones y recursos
+    </h2>
+
+    <p
+        data-es="Próximamente se incorporarán libros, manuales, documentos técnicos y otros recursos."
+        data-en="Books, manuals, technical documents and other resources will be added soon.">
+        Próximamente se incorporarán libros, manuales, documentos técnicos
+        y otros recursos.
+    </p>
+
+</section>
+
+
+<section class="section" id="contacto">
+
+    <h2
+        data-es="Contacto"
+        data-en="Contact">
+        Contacto
+    </h2>
+
+    <p>
+        <strong>Email:</strong>
+        orecayetano.r@gmail.com
+    </p>
+
+</section>
+
+</main>
+
+
+<footer>
+    © 2026 Richard Oré Cayetano
+</footer>
+
+
+<script>
+
+    let currentLanguage = "es";
+
+    const languageButton = document.getElementById("languageButton");
+
+    languageButton.addEventListener("click", function () {
+
+        currentLanguage = currentLanguage === "es" ? "en" : "es";
+
+        document.querySelectorAll("[data-es][data-en]").forEach(function(element) {
+
+            element.textContent = element.getAttribute("data-" + currentLanguage);
+
+        });
+
+        document.documentElement.lang = currentLanguage;
+
+        languageButton.textContent =
+            currentLanguage === "es" ? "EN" : "ES";
+    });
+
+</script>
+
+</body>
+</html>
+```
