@@ -229,45 +229,135 @@
             font-size: 0.92rem;
         }
 
-        /* =========================
-           PROYECTOS
-        ========================= */
+```css
+/* ================================
+   SECCIÓN PROYECTOS
+   ================================ */
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 22px;
-        }
+.projects-section {
+    padding: 80px 0;
+}
 
-        .project {
-            border: 1px solid var(--borde);
-            border-radius: 8px;
-            padding: 28px;
-            background: white;
-        }
+.projects-intro {
+    max-width: 760px;
+    margin: 0 auto 45px;
+    text-align: center;
+    color: #5b6770;
+    line-height: 1.7;
+}
 
-        .project h3 {
-            color: var(--azul);
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
+.projects-featured {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 55px;
+}
 
-        .project p {
-            color: var(--gris);
-            font-size: 0.94rem;
-        }
+.project-card {
+    background: #ffffff;
+    border: 1px solid #e1e7eb;
+    border-radius: 12px;
+    padding: 28px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
-        .project-tag {
-            display: inline-block;
-            margin-top: 18px;
-            padding: 5px 9px;
-            background: var(--agua);
-            color: var(--azul-claro);
-            border-radius: 4px;
-            font-size: 0.78rem;
-            font-weight: bold;
-        }
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(20, 55, 80, 0.10);
+}
 
+.project-card.featured {
+    border-top: 4px solid #164e70;
+}
+
+.project-number {
+    display: inline-block;
+    margin-bottom: 14px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #6c7b86;
+}
+
+.project-card h3 {
+    margin: 0 0 12px;
+    color: #163f5a;
+    font-size: 1.35rem;
+}
+
+.project-card p {
+    margin: 0 0 20px;
+    color: #5d6870;
+    line-height: 1.65;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #164e70;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.project-link:hover {
+    text-decoration: underline;
+}
+
+.projects-secondary-title {
+    margin: 0 0 25px;
+    color: #163f5a;
+    font-size: 1.35rem;
+}
+
+.projects-secondary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.project-secondary-card {
+    background: #f7f9fa;
+    border: 1px solid #e4e9ec;
+    border-radius: 10px;
+    padding: 24px;
+}
+
+.project-secondary-card h3 {
+    margin: 0 0 9px;
+    color: #254f67;
+    font-size: 1.1rem;
+}
+
+.project-secondary-card p {
+    margin: 0;
+    color: #626d74;
+    line-height: 1.6;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+    .projects-featured {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-secondary {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .projects-section {
+        padding: 60px 0;
+    }
+
+    .project-card,
+    .project-secondary-card {
+        padding: 22px;
+    }
+}
+```
         /* =========================
            EXPERIENCIA
         ========================= */
@@ -648,116 +738,180 @@
      PROYECTOS
 ========================= -->
 
-<section id="proyectos">
+```html
+<section id="proyectos" class="projects-section">
 
-    <div class="section-container">
+    <div class="container">
 
-        <h2 class="section-title"
-            data-es="Proyectos y herramientas"
-            data-en="Projects and tools">
-            Proyectos y herramientas
+        <h2 class="section-title" data-es="Proyectos" data-en="Projects">
+            Proyectos
         </h2>
 
-        <p class="section-intro"
-           data-es="Desarrollo de soluciones digitales y proyectos aplicados a la ingeniería."
-           data-en="Development of digital solutions and applied engineering projects.">
-
-            Desarrollo de soluciones digitales y proyectos
-            aplicados a la ingeniería.
-
+        <p class="projects-intro"
+           data-es="Desarrollo de herramientas, publicaciones y soluciones aplicadas a la ingeniería civil, los recursos hídricos y el territorio."
+           data-en="Development of tools, publications and applied solutions for civil engineering, water resources and spatial analysis.">
+            Desarrollo de herramientas, publicaciones y soluciones aplicadas
+            a la ingeniería civil, los recursos hídricos y el territorio.
         </p>
 
 
-        <div class="projects-grid">
+        <!-- PROYECTOS PRINCIPALES -->
 
+        <div class="projects-featured">
 
-            <article class="project">
+            <!-- HydroROC -->
+
+            <article class="project-card featured">
+
+                <span class="project-number">01 · SOFTWARE</span>
 
                 <h3>HydroROC</h3>
 
-                <p
-                    data-es="Plugin para QGIS orientado al análisis hidrológico y al procesamiento de información espacial."
-                    data-en="QGIS plugin focused on hydrological analysis and spatial information processing.">
-
-                    Plugin para QGIS orientado al análisis hidrológico
-                    y al procesamiento de información espacial.
-
+                <p data-es="Plugin para QGIS orientado al análisis hidrológico y al procesamiento de información espacial para estudios de recursos hídricos."
+                   data-en="QGIS plugin focused on hydrological analysis and spatial data processing for water resources studies.">
+                    Plugin para QGIS orientado al análisis hidrológico y al
+                    procesamiento de información espacial para estudios de
+                    recursos hídricos.
                 </p>
 
-                <span class="project-tag">
-                    QGIS
-                </span>
+                <a href="https://github.com/orecayetanor/HydroROC"
+                   class="project-link"
+                   target="_blank"
+                   rel="noopener"
+                   data-es="Ver proyecto →"
+                   data-en="View project →">
+                    Ver proyecto →
+                </a>
 
             </article>
 
 
-            <article class="project">
+            <!-- AforROC -->
+
+            <article class="project-card featured">
+
+                <span class="project-number">02 · APLICACIÓN</span>
 
                 <h3>AforROC</h3>
 
-                <p
-                    data-es="Aplicación para medición y análisis de caudales mediante aforos por secciones."
-                    data-en="Application for river discharge measurement and analysis using cross-section gauging.">
-
-                    Aplicación para medición y análisis de caudales
-                    mediante aforos por secciones.
-
+                <p data-es="Aplicación Android para el procesamiento de mediciones de campo y cálculo de caudales mediante el método de secciones."
+                   data-en="Android application for processing field measurements and calculating river discharge using the section method.">
+                    Aplicación Android para el procesamiento de mediciones de
+                    campo y cálculo de caudales mediante el método de secciones.
                 </p>
 
-                <span class="project-tag">
-                    Android
-                </span>
+                <a href="#contacto"
+                   class="project-link"
+                   data-es="Conocer más →"
+                   data-en="Learn more →">
+                    Conocer más →
+                </a>
 
             </article>
 
 
-            <article class="project">
+            <!-- HidroLibro -->
 
-                <h3
-                    data-es="Proyectos de saneamiento"
-                    data-en="Water and sanitation projects">
-                    Proyectos de saneamiento
-                </h3>
+            <article class="project-card featured">
 
-                <p
-                    data-es="Desarrollo de proyectos y expedientes técnicos relacionados con sistemas de agua y saneamiento."
-                    data-en="Development of technical projects and engineering documents for water and sanitation systems.">
+                <span class="project-number">03 · PUBLICACIÓN</span>
 
-                    Desarrollo de proyectos y expedientes técnicos
-                    relacionados con sistemas de agua y saneamiento.
+                <h3>HidroLibro</h3>
 
+                <p data-es="Colección de libros y manuales técnicos orientados a la formación y aplicación práctica de la ingeniería hidráulica e hidrológica."
+                   data-en="Collection of technical books and manuals focused on practical training and application in hydrology and hydraulic engineering.">
+                    Colección de libros y manuales técnicos orientados a la
+                    formación y aplicación práctica de la ingeniería hidráulica
+                    e hidrológica.
                 </p>
 
-                <span class="project-tag"
-                      data-es="Ingeniería"
-                      data-en="Engineering">
-                    Ingeniería
-                </span>
+                <a href="#publicaciones"
+                   class="project-link"
+                   data-es="Ver publicaciones →"
+                   data-en="View publications →">
+                    Ver publicaciones →
+                </a>
+
+            </article>
+
+        </div>
+
+
+        <!-- PROYECTOS Y EXPERIENCIA APLICADA -->
+
+        <h3 class="projects-secondary-title"
+            data-es="Proyectos y experiencia aplicada"
+            data-en="Projects and applied experience">
+            Proyectos y experiencia aplicada
+        </h3>
+
+
+        <div class="projects-secondary">
+
+            <article class="project-secondary-card">
+
+                <h3 data-es="Modelamiento hidrológico"
+                    data-en="Hydrological modeling">
+                    Modelamiento hidrológico
+                </h3>
+
+                <p data-es="Aplicación de QGIS, HEC-HMS y HEC-RAS para el análisis de cuencas, transformación lluvia–escorrentía, tránsito de avenidas y evaluación de inundaciones."
+                   data-en="Application of QGIS, HEC-HMS and HEC-RAS for watershed analysis, rainfall-runoff transformation, flood routing and flood assessment.">
+                    Aplicación de QGIS, HEC-HMS y HEC-RAS para el análisis de
+                    cuencas, transformación lluvia–escorrentía, tránsito de
+                    avenidas y evaluación de inundaciones.
+                </p>
 
             </article>
 
 
-            <article class="project">
+            <article class="project-secondary-card">
 
-                <h3
-                    data-es="Modelamiento"
-                    data-en="Modeling">
-                    Modelamiento
+                <h3 data-es="Saneamiento y expedientes técnicos"
+                    data-en="Sanitation and technical project files">
+                    Saneamiento y expedientes técnicos
                 </h3>
 
-                <p
-                    data-es="Aplicación de herramientas GIS y modelos hidrológicos e hidráulicos para el análisis de problemas reales de ingeniería."
-                    data-en="Application of GIS tools and hydrological and hydraulic models to real engineering problems.">
-
-                    Aplicación de herramientas GIS y modelos hidrológicos
-                    e hidráulicos para el análisis de problemas reales
-                    de ingeniería.
-
+                <p data-es="Desarrollo de proyectos y documentación técnica relacionados con sistemas de agua, alcantarillado, tratamiento de aguas residuales y servicios de saneamiento."
+                   data-en="Development of projects and technical documentation related to water supply, sewerage, wastewater treatment and sanitation services.">
+                    Desarrollo de proyectos y documentación técnica relacionados
+                    con sistemas de agua, alcantarillado, tratamiento de aguas
+                    residuales y servicios de saneamiento.
                 </p>
 
-                <span class="project-tag">
-                    GIS · HEC-HMS · HEC-RAS
-                </span>
+            </article>
+
+
+            <article class="project-secondary-card">
+
+                <h3 data-es="Hidráulica y medición de caudales"
+                    data-en="Hydraulics and discharge measurement">
+                    Hidráulica y medición de caudales
+                </h3>
+
+                <p data-es="Trabajo con métodos de aforo, estructuras hidráulicas, mediciones de campo y procesamiento de información para la estimación de caudales."
+                   data-en="Work with discharge measurement methods, hydraulic structures, field measurements and data processing for flow estimation.">
+                    Trabajo con métodos de aforo, estructuras hidráulicas,
+                    mediciones de campo y procesamiento de información para
+                    la estimación de caudales.
+                </p>
+
+            </article>
+
+
+            <article class="project-secondary-card">
+
+                <h3 data-es="Construcción y obra"
+                    data-en="Construction and field work">
+                    Construcción y obra
+                </h3>
+
+                <p data-es="Experiencia vinculada a la ejecución y seguimiento de trabajos de ingeniería, control de campo y aplicación de criterios técnicos en obra."
+                   data-en="Experience related to engineering works, field monitoring, construction control and practical application of technical criteria.">
+                    Experiencia vinculada a la ejecución y seguimiento de
+                    trabajos de ingeniería, control de campo y aplicación de
+                    criterios técnicos en obra.
+                </p>
 
             </article>
 
@@ -766,8 +920,7 @@
     </div>
 
 </section>
-
-
+```
 <!-- =========================
      EXPERIENCIA
 ========================= -->
