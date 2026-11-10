@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Udemy: Delimitación y Parámetros Hidrológicos con HydroROC | Ing. Richard Oré Cayetano</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        tealBrand: {
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax for Rendering Formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .slide-enter { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.5); border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 h-full flex flex-col transition-colors duration-300 select-none overflow-hidden" id="appBody">
+
+    <!-- Top Navigation Header -->
+    <header class="h-14 border-b border-slate-800 bg-slate-900/90 backdrop-blur px-4 flex items-center justify-between z-30 shrink-0">
+        <div class="flex items-center space-x-3">
+            <button id="toggleSidebar" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition" title="Menú de Navegación">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+            <div class="flex items-center space-x-2">
+                <span class="bg-brand-600 text-xs font-bold px-2 py-0.5 rounded text-white tracking-wide uppercase">UDEMY</span>
+                <span class="text-sm font-semibold tracking-tight text-slate-200 hidden sm:inline">Delimitación y Parámetros Hidrológicos con HydroROC</span>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <!-- Author Quick Links -->
+            <div class="hidden md:flex items-center space-x-2 text-xs">
+                <a href="https://orecayetanor.github.io/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-brand-400 font-medium flex items-center gap-1.5 border border-slate-700 transition">
+                    <i class="fa-solid fa-globe"></i> Web
+                </a>
+                <a href="https://plugins.qgis.org/plugins/HydroROC/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-emerald-950 hover:bg-emerald-900 text-emerald-300 font-medium flex items-center gap-1.5 border border-emerald-800/60 transition">
+                    <i class="fa-solid fa-plug text-emerald-400"></i> HydroROC QGIS
+                </a>
+                <a href="https://www.paypal.com/ncp/payment/T4U45UF6XYEJ8" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-md bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold flex items-center gap-1.5 shadow-sm transition">
+                    <i class="fa-brands fa-paypal"></i> Donar al Proyecto
+                </a>
+            </div>
+
+            <!-- Slide Counter -->
+            <div class="text-xs sm:text-sm font-medium text-slate-400">
+                Diapositiva <span id="currentSlideNum" class="text-brand-400 font-bold">1</span> de <span id="totalSlidesNum">6</span>
+            </div>
+
+            <!-- Fullscreen Toggle -->
+            <button id="btnFullscreen" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition hidden sm:block" title="Pantalla Completa">
+                <i class="fa-solid fa-expand text-base"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="flex-1 flex overflow-hidden relative">
+
+        <!-- Drawer Sidebar -->
+        <aside id="sidebar" class="absolute inset-y-0 left-0 w-80 bg-slate-950/95 border-r border-slate-800 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out backdrop-blur flex flex-col">
+            <div class="p-4 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="font-bold text-slate-200 text-sm tracking-wide uppercase flex items-center gap-2">
+                    <i class="fa-solid fa-list-ol text-brand-400"></i> Contenido del Curso
+                </h3>
+                <button id="closeSidebar" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            
+            <!-- Author Card inside Drawer -->
+            <div class="p-3 bg-slate-900/80 border-b border-slate-800 text-xs space-y-1.5">
+                <div class="font-bold text-white flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-tie text-brand-400"></i> Ing. Richard Oré Cayetano
+                </div>
+                <div class="text-slate-400 text-[11px] flex items-center gap-1">
+                    <i class="fa-solid fa-location-dot text-red-400"></i> Huancavelica, Perú
+                </div>
+                <div class="flex items-center gap-2 pt-1">
+                    <a href="https://wa.me/51964060080" target="_blank" class="text-emerald-400 hover:underline flex items-center gap-1 text-[11px]">
+                        <i class="fa-brands fa-whatsapp"></i> +51 964060080
+                    </a>
+                </div>
+                <div class="pt-2">
+                    <a href="https://www.paypal.com/ncp/payment/T4U45UF6XYEJ8" target="_blank" class="w-full py-1.5 px-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded flex items-center justify-center gap-1.5 text-[11px] transition shadow">
+                        <i class="fa-brands fa-paypal"></i> Apoyar Desarrollo HydroROC
+                    </a>
+                </div>
+            </div>
+
+            <nav class="flex-1 overflow-y-auto p-3 space-y-1.5" id="tocContainer">
+                <!-- Dynamic TOC populated by JS -->
+            </nav>
+            <div class="p-4 border-t border-slate-800 text-xs text-slate-500 text-center">
+                Presiona <kbd class="px-1.5 py-0.5 bg-slate-800 text-slate-300 rounded border border-slate-700">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-800 text-slate-300 rounded border border-slate-700">→</kbd> para navegar
+            </div>
+        </aside>
+
+        <!-- Overlay backdrop for mobile sidebar -->
+        <div id="sidebarBackdrop" class="absolute inset-0 bg-black/60 z-30 hidden"></div>
+
+        <!-- Slide Presentation Viewport -->
+        <main class="flex-1 flex flex-col relative overflow-y-auto p-4 sm:p-8 justify-center items-center bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950">
+
+            <!-- Dynamic Slide Canvas -->
+            <div id="slideContent" class="w-full max-w-6xl mx-auto h-full flex flex-col justify-center slide-enter">
+                <!-- Slide content inserted via JavaScript -->
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-20 right-6 bg-emerald-600 text-white px-4 py-2 rounded-lg shadow-xl text-xs font-semibold flex items-center gap-2 opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+        <i class="fa-solid fa-check-circle"></i> <span id="toastMsg">Enlace copiado al portapapeles</span>
+    </div>
+
+    <!-- Bottom Controls & Progress Bar -->
+    <footer class="h-16 border-t border-slate-800 bg-slate-950/90 px-4 flex flex-col justify-between z-20 shrink-0">
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden -mt-1">
+            <div id="progressBar" class="bg-gradient-to-r from-brand-500 to-tealBrand-400 h-full w-1/6 transition-all duration-300"></div>
+        </div>
+
+        <div class="flex-1 flex items-center justify-between py-2">
+            <!-- Nav Prev Button -->
+            <button id="btnPrev" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 disabled:opacity-40 disabled:cursor-not-allowed transition text-sm font-semibold">
+                <i class="fa-solid fa-arrow-left"></i> Anterior
+            </button>
+
+            <!-- Footer Author & Quick Web Badge -->
+            <div class="hidden sm:flex items-center gap-3 text-xs text-slate-400">
+                <span class="text-slate-300 font-medium">Ing. Richard Oré Cayetano</span>
+                <span class="text-slate-600">•</span>
+                <span class="text-slate-400"><i class="fa-solid fa-location-dot text-red-400"></i> Perú - HVCA</span>
+                <span class="text-slate-600">•</span>
+                <a href="https://orecayetanor.github.io/" target="_blank" class="text-brand-400 hover:underline">
+                    orecayetanor.github.io
+                </a>
+            </div>
+
+            <!-- Nav Next Button -->
+            <button id="btnNext" class="flex items-center gap-2 px-5 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold transition shadow-lg shadow-brand-600/20 text-sm">
+                Siguiente <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </footer>
+
+    <!-- JavaScript Presentation Logic & Data -->
+    <script>
+        // Helper function for clipboard copy
+        function copyToClipboard(text, message) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast(message || 'Copiado al portapapeles');
+            } catch (err) {
+                console.error('Error al copiar', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = msg;
+            toast.classList.remove('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        // Array of Slide Definitions
+        const slides = [
+            {
+                id: 1,
+                module: "Portada",
+                title: "Delimitación y Estimación de Parámetros Hidrológicos de Cuencas",
+                subtitle: "Curso práctico para Udemy con QGIS y el Plugin HydroROC",
+                content: `
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                        <div class="lg:col-span-7 space-y-4 text-left">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-900/60 border border-brand-500/30 text-brand-400 text-xs font-semibold">
+                                <i class="fa-solid fa-certificate"></i> Programa Oficial para Udemy & GIS
+                            </div>
+                            <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                                Delimitación y Estimación de Parámetros Hidrológicos con HydroROC
+                            </h1>
+                            <p class="text-sm sm:text-base text-slate-300 font-light leading-relaxed">
+                                Domina el procesamiento de modelos digitales de elevación (DEM), delimitación automática de cuencas en segundos y el cálculo morfométrico e hidrológico avanzado para proyectos de ingeniería.
+                            </p>
+
+                            <!-- Author Card Profile -->
+                            <div class="p-4 bg-slate-800/80 border border-slate-700/80 rounded-xl backdrop-blur flex flex-wrap sm:flex-nowrap items-center gap-4">
+                                <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-brand-600 to-tealBrand-400 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shrink-0">
+                                    RO
+                                </div>
+                                <div class="flex-1 min-w-[200px]">
+                                    <div class="text-xs font-bold text-brand-400 uppercase tracking-wider">Instructor del Curso</div>
+                                    <h3 class="text-base font-bold text-white">Ing. Richard Oré Cayetano</h3>
+                                    <div class="text-xs text-slate-300 flex items-center gap-3 mt-0.5">
+                                        <span><i class="fa-solid fa-location-dot text-red-400"></i> Huancavelica, Perú</span>
+                                        <a href="https://wa.me/51964060080" target="_blank" class="text-emerald-400 hover:underline flex items-center gap-1 font-mono">
+                                            <i class="fa-brands fa-whatsapp"></i> +51 964060080
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Resource Badges -->
+                            <div class="flex flex-wrap gap-2 pt-1">
+                                <a href="https://orecayetanor.github.io/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-md">
+                                    <i class="fa-solid fa-globe"></i> Visitar Mi Web Personal
+                                </a>
+                                <a href="https://plugins.qgis.org/plugins/HydroROC/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-md">
+                                    <i class="fa-solid fa-puzzle-piece"></i> HydroROC en QGIS Repository
+                                </a>
+                                <a href="https://www.paypal.com/ncp/payment/T4U45UF6XYEJ8" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 text-xs font-extrabold transition flex items-center gap-1.5 shadow-lg">
+                                    <i class="fa-brands fa-paypal text-sm"></i> Apoyar Desarrollo HydroROC
+                                </a>
+                                <button onclick="copyToClipboard('https://plugins.qgis.org/plugins/HydroROC/', 'Enlace de HydroROC copiado')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 transition flex items-center gap-1.5">
+                                    <i class="fa-solid fa-copy"></i> Copiar URL Plugin
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Illustration & Quick Summary Grid -->
+                        <div class="lg:col-span-5 space-y-3">
+                            <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-2xl">
+                                <img src="Imagenes/Hidrologia01.png" alt="Preprocesamiento DEM" class="w-full h-auto rounded-xl border border-slate-800 shadow-md">
+								<div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-2 left-3 right-3 text-xs font-semibold text-white flex justify-between items-center">
+                                    <span><i class="fa-solid fa-water text-brand-400"></i> Delimitación autmática</span>
+                                    <span class="bg-slate-900/80 px-2 py-0.5 rounded text-[10px] text-slate-300">DEM 12.5m / 30m</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 text-left">
+                                <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/60">
+                                    <i class="fa-solid fa-bolt text-amber-400 mb-1 text-sm"></i>
+                                    <div class="text-xs font-bold text-white">Delimitación Automática</div>
+                                    <div class="text-[11px] text-slate-400">Python/HydroROC</div>
+                                </div>
+                                <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/60">
+                                    <i class="fa-solid fa-calculator text-tealBrand-400 mb-1 text-sm"></i>
+                                    <div class="text-xs font-bold text-white">Parámetros morfométricos/Hidrológicos/Tc</div>
+                                    <div class="text-[11px] text-slate-400">Kirpich, Témez, SCS</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 2,
+                module: "Módulo 1",
+                title: "Módulo 1: Descarga y Reproyección del DEM",
+                subtitle: "Verificando que el raster de elevación esté correcto antes de realizar el procesamiento hidrológico.",
+                content: `
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                        <div class="lg:col-span-7 space-y-3">
+                            <div class="bg-slate-800/50 p-3.5 rounded-xl border border-slate-700/70">
+                                <h3 class="font-bold text-brand-400 flex items-center gap-2 mb-1.5 text-sm">
+                                    <i class="fa-solid fa-map"></i> 1. DEM
+                                </h3>
+                                <ul class="text-xs text-slate-300 space-y-1 list-disc pl-4">
+                                    <li>En el ámbito de la cartografía y los Sistemas de Información Geográfica (SIG), un DEM (Digital Elevation Model, o MDE en español) es una representación numérica y matemática de la distribución espacial de la altitud de la superficie terrestre</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800/50 p-3.5 rounded-xl border border-slate-700/70">
+                                <h3 class="font-bold text-brand-400 flex items-center gap-2 mb-1.5 text-sm">
+                                    <i class="fa-solid fa-database"></i> 2. Fuentes Gratuitas de DEMs de Alta Resolución
+                                </h3>
+                                <ul class="text-xs text-slate-300 space-y-1 list-disc pl-4">
+                                    <li><strong>ALOS PALSAR (12.5m):</strong> Máximo detalle topográfico para microcuencas.</li>
+                                    <li><strong>NASADEM / SRTM (30m):</strong> Cobertura estándar continua a nivel global.</li>
+                                    <li>Descarga desde Copernicus Open Hub, Earthdata Search y USGS EarthExplorer.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800/50 p-3.5 rounded-xl border border-slate-700/70">
+                                <h3 class="font-bold text-brand-400 flex items-center gap-2 mb-1.5 text-sm">
+                                    <i class="fa-solid fa-compass"></i> 3. Reproyección Cartográfica Obligatoria
+                                </h3>
+                                <p class="text-xs text-slate-300 mb-1.5">
+                                    Transformación del modelo geográfico (WGS84 en grados) a proyecciones proyectadas planas UTM (Zonas 17S, 18S, 19S para Perú y Sudamérica) para medir distancias y áreas en metros.
+                                </p>
+                                <div class="bg-slate-950 p-2 rounded text-[11px] font-mono text-emerald-400 border border-slate-800">
+                                    GDAL Reproject: gdalwarp -t_srs EPSG:32718 dem_geo.tif dem_utm18s.tif
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800/50 p-3.5 rounded-xl border border-slate-700/70">
+                                <h3 class="font-bold text-brand-400 flex items-center gap-2 mb-1.5 text-sm">
+                                    <i class="fa-solid fa-filter"></i> 4. Acondicionamiento Hidrológico (Fill Sinks)
+                                </h3>
+                                <p class="text-xs text-slate-300">
+                                    HydroROC/Corrección de sumideros artificiales y depresiones cerradas mediante algoritmos de relleno (Wang & Liu / Planchon & Darboux) para garantizar el flujo continuo de escorrentía.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 space-y-3">
+                            <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-xl">
+                                <img src="Imagenes/Hidrologia03.png" alt="Preprocesamiento DEM" class="w-full h-auto rounded-xl border border-slate-800 shadow-md">
+                                <div class="absolute inset-0 bg-slate-950/10"></div>
+                                <div class="absolute top-2 right-2 bg-slate-900/90 text-brand-300 px-2 py-0.5 rounded text-[10px] font-mono border border-slate-700">
+                                    DEM Hydro-Conditioned
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-xs font-bold uppercase text-slate-400 mb-3 text-center">Secuencia de Procesamiento DEM</h4>
+                                <div class="space-y-2 text-xs">
+                                    <div class="flex items-center gap-2 p-2 bg-slate-900 rounded border border-slate-800">
+                                        <span class="w-5 h-5 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-[10px]">1</span>
+                                        <span class="text-slate-200">DEM coordenadas geográficas ó sistema UTM</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 p-2 bg-slate-900 rounded border border-slate-800">
+                                        <span class="w-5 h-5 rounded-full bg-tealBrand-600 text-white font-bold flex items-center justify-center text-[10px]">2</span>
+                                        <span class="text-slate-200">Reproyección WGS84 <i class="fa-solid fa-arrow-right"></i> a sistema UTM</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 p-2 bg-slate-900 border-l-4 border-l-emerald-500 rounded">
+                                        <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[10px]">3</span>
+                                        <span class="text-slate-200">DEM Rellenado (Sin Sumideros)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 3,
+                module: "Módulo 2",
+                title: "Módulo 2: Delimitación Automática de Cuencas con HydroROC",
+                subtitle: "Automatización total de la extracción de red hídrica y cuenca en QGIS",
+                content: `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                            <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-8 h-8 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold mb-2 text-sm">
+                                        <i class="fa-solid fa-route"></i>
+                                    </div>
+                                    <h3 class="font-bold text-slate-100 text-sm mb-1.5">1. Modelo Digital de Elevación (DEM)</h3>
+                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                        El DEM de entrada debe estar proyectado obligatoriamente en un sistema de coordenadas UTM (metros).
+                                    </p>
+                                </div>
+                                <div class="mt-3 pt-2 border-t border-slate-700/50 text-[11px] text-brand-300 font-mono">
+                                    Códigos SUR: EPSG:WGS84/UTM zone 17S, 18s.....24s
+                                </div>
+							<img src="Imagenes/Hidrologia06.png" alt="Vista 1" class="w-full h-40 object-contain rounded-xl p-1">
+                            </div>
+
+                            <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-8 h-8 rounded-lg bg-tealBrand-500/20 text-tealBrand-400 flex items-center justify-center font-bold mb-2 text-sm">
+                                        <i class="fa-solid fa-water"></i>
+                                    </div>
+                                    <h3 class="font-bold text-slate-100 text-sm mb-1.5">2. Radio máximo de ajuste (m)</h3>
+                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                        Distancia de búsqueda (en metros) establecida alrededor del punto de desfogue o salida (outlet) ingresado por el usuario.
+                                    </p>
+                                </div>
+                                <div class="mt-3 pt-2 border-t border-slate-700/50 text-[11px] text-tealBrand-300 font-mono">
+                                    Umbral recomendado: > 50 a 100 metros
+                                </div>
+							<img src="Imagenes/Hidrologia07.png" alt="Vista 1" class="w-full h-40 object-contain rounded-xl p-1">
+                            </div>
+
+                            <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 flex flex-col justify-between">
+                                <div>
+                                    <div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold mb-2 text-sm">
+                                        <i class="fa-solid fa-location-crosshairs"></i>
+                                    </div>
+                                    <h3 class="font-bold text-slate-100 text-sm mb-1.5">3. Área mínima para generar ríos (km²)</h3>
+                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                        Controla directamente la densidad de drenaje y el orden de los arroyos iniciales. Un umbral bajo genera redes muy ramificadas en cabeceras de cuenca; un umbral alto aísla únicamente los colectores principales.
+                                    </p>
+                                </div>
+                                <div class="mt-3 pt-2 border-t border-slate-700/50 text-[11px] text-indigo-300 font-mono">
+                                    Salida: vector.gpkg / .shp 
+                                </div>
+							<img src="Imagenes/Hidrologia08.png" alt="Vista 1" class="w-full h-40 object-contain rounded-xl p-1">
+                            </div>
+                        </div>
+
+                        <!-- QGIS Plugin Repository Card -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-plug"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-white flex items-center gap-2">
+                                        Plugin HydroROC en el Repositorio Oficial de QGIS
+                                    </div>
+                                    <div class="text-[11px] text-slate-400">Instalación directa desde el menú de Complementos de QGIS 3.x</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <a href="https://plugins.qgis.org/plugins/HydroROC/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg transition">
+                                    Ver en QGIS Plugins Repository <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-[10px]"></i>
+                                </a>
+							 </div>
+                        </div>
+                    </div>
+					<!-- Contenedor para mostrar dos imágenes lado a lado más pequeñas -->
+					<!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-2"> -->
+
+						<!-- IMAGEN 1 -->
+						<!-- <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-xl bg-slate-900"> -->
+							<!-- <img src="Imagenes/Hidrologia05.png" alt="Vista 1" class="w-full h-48 object-contain rounded-xl p-1"> -->
+							<!-- <div class="absolute bottom-1 left-3 right-3 text-xs font-semibold text-white flex justify-between items-center bg-slate-950/80 px-2 py-1 rounded"> -->
+								<!-- <span><i class="fa-solid fa-water text-cyan-400"></i> Vista o Proceso 1</span> -->
+							<!-- </div> -->
+						<!-- </div> -->
+
+						<!-- IMAGEN 2 -->
+						<!-- <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-xl bg-slate-900"> -->
+							<!-- <img src="Imagenes/HydroROC.png" alt="Vista 2" class="w-full h-48 object-contain rounded-xl p-1"> -->
+							<!-- <div class="absolute bottom-1 left-3 right-3 text-xs font-semibold text-white flex justify-between items-center bg-slate-950/80 px-2 py-1 rounded"> -->
+								<!-- <span><i class="fa-solid fa-water text-cyan-400"></i> Vista o Proceso 2</span> -->
+							<!-- </div> -->
+						<!-- </div> -->
+
+					<!-- </div> -->
+                `
+            },
+            {
+                id: 4,
+                module: "Módulo 3",
+                title: "Módulo 3: Parámetros Morfométricos de la Cuenca",
+                subtitle: "Traducción cuantitativa de la forma, relieve y red hídrica para el diagnóstico hidrológico",
+                content: `
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                        <!-- Geometría y Forma -->
+                        <div class="space-y-3">
+                            <h3 class="text-xs font-bold text-brand-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-draw-polygon"></i> 1. Parámetros Forma y Dimensiones
+                            </h3>
+                            
+                            <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/60 flex justify-between items-center">
+                                <div>
+                                    <div class="text-xs font-bold text-white">Área (A) y Perímetro (P)</div>
+                                    <div class="text-[11px] text-slate-400">Superficie en km<sup>2</sup> y contorno en km</div>
+                                </div>
+                                <span class="text-[11px] font-mono text-brand-300 bg-slate-900 px-2 py-0.5 rounded">SIG Vectorial</span>
+                            </div>
+
+                            <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/60 flex justify-between items-center">
+                                <div>
+                                    <div class="text-xs font-bold text-white">Índice de Gravelius (K<sub>c</sub>)</div>
+                                    <div class="text-[11px] text-slate-400">Coeficiente de compacidad circular</div>
+                                </div>
+                                <div class="font-mono text-xs text-amber-400">
+                                    $$K_c = 0.28 \\frac{P}{\\sqrt{A}}$$
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/60 flex justify-between items-center">
+                                <div>
+                                    <div class="text-xs font-bold text-white">Rectángulo Equivalente</div>
+                                    <div class="text-[11px] text-slate-400">Lados mayor ($L$) y menor ($l$)</div>
+                                </div>
+                                <div class="font-mono text-[11px] text-tealBrand-400">
+                                    $$L = \\frac{K_c \\sqrt{A}}{1.12} \\left[1 + \\sqrt{1 - \\left(\\frac{1.12}{K_c}\\right)^2}\\right]$$
+                                </div>
+                            </div>
+							<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Parámetro</th>
+                <th>Símbolo</th>
+                <th>Medición</th>
+                <th>Resultados</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Área de la cuenca</td>
+                <td>A</td>
+                <td>Digital</td>
+                <td>188.73 km<sup>2</sup></td>
+            </tr>
+            <tr>
+                <td>Perímetro de cuenca</td>
+                <td>P</td>
+                <td>Digital</td>
+                <td>90.19 km</td>
+            </tr>
+            <tr>
+                <td>Longitud Axial</td>
+                <td>L</td>
+                <td>Digital</td>
+                <td>17.00 m</td>
+            </tr>
+            <tr>
+                <td>Índice de Gravelius</td>
+                <td>K<sub>c</sub></td>
+                <td>0.28 · P / √A</td>
+                <td>1.84</td>
+            </tr>
+            <tr>
+                <td>Factor de forma</td>
+                <td>f</td>
+                <td>A / L<sup>2</sup></td>
+                <td>0.65</td>
+            </tr>
+            <tr>
+                <td>Rectángulo equivalente (Largo)</td>
+                <td>R<sub>L</sub></td>
+                <td>Eq. 1</td>
+                <td>40.48 km</td>
+            </tr>
+            <tr>
+                <td>Rectángulo equivalente (Ancho)</td>
+                <td>R<sub>l</sub></td>
+                <td>Eq. 2</td>
+                <td>4.66 km</td>
+            </tr>
+            <tr>
+                <td>Centro de gravedad (Este)</td>
+                <td>x</td>
+                <td>Digital</td>
+                <td>510371.0 m E</td>
+            </tr>
+            <tr>
+                <td>Centro de gravedad (Sur)</td>
+                <td>y</td>
+                <td>Digital</td>
+                <td>8629306.4 m S</td>
+            </tr>
+            <tr>
+                <td>Cota máxima</td>
+                <td>C<sub>max</sub></td>
+                <td>Digital</td>
+                <td>4484.97 msnm.</td>
+            </tr>
+            <tr>
+                <td>Cota mínima</td>
+                <td>C<sub>min</sub></td>
+                <td>Digital</td>
+                <td>3199.00 msnm.</td>
+            </tr>
+            <tr>
+                <td>Altitud media cuenca</td>
+                <td>Atl<sub>m</sub></td>
+                <td>Digital</td>
+                <td>3858.83 msnm.</td>
+            </tr>
+            <tr>
+                <td>Cmáx.-Cauce Principal</td>
+                <td>Cmax<sub>m</sub></td>
+                <td>Digital</td>
+                <td>4202.77 msnm.</td>
+            </tr>
+            <tr>
+                <td>Longitud de cauce principal</td>
+                <td>Long</td>
+                <td>Digital</td>
+                <td>27.44 km</td>
+            </tr>
+            <tr>
+                <td>Pendiente media de cauce</td>
+                <td>S</td>
+                <td>ΔH / Long</td>
+                <td>0.037</td>
+            </tr>
+        </tbody>
+    </table>
+                        </div>
+
+                        <!-- Relieve y Pendiente -->
+                        <div class="space-y-3">
+                            <h3 class="text-xs font-bold text-tealBrand-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-mountain font-bold"></i> 2. Parámetros de Relieve y Pendientes
+                            </h3>
+
+                            <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/60">
+                                <div class="text-xs font-bold text-white mb-1">Curva Hipsométrica e Histograma de Cotas</div>
+                                <p class="text-[11px] text-slate-400">
+                                    Representación del área acumulada por niveles de elevación para determinar la etapa evolutiva de la cuenca (juventud, madurez o decrepitud).
+                                </p>
+                            </div>
+
+                            <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/60">
+                                <div class="text-xs font-bold text-white mb-1">Pendiente Media de la Cuenca (Alvord)</div>
+                                <div class="font-mono text-xs text-emerald-400 bg-slate-950 p-1.5 rounded text-center">
+                                    $$S = \\frac{D \\cdot \\sum L}{A}$$
+                                </div>
+                                <div class="text-[10px] text-slate-400 text-center mt-1">Donde $D$ es la equidistancia entre curvas de nivel y $\\sum L$ la longitud total de curvas.</div>
+                            </div>
+
+                            <div class="bg-slate-800/60 p-3 rounded-lg border border-slate-700/60">
+                                <div class="text-xs font-bold text-white mb-0.5">Pendiente del Cauce Principal (Taylor-Schwarz)</div>
+                                <p class="text-[11px] text-slate-400">Ponderación equivalente por tramos homogéneos de pendiente del río.</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 5,
+                module: "Módulo 4",
+                title: "Módulo 4: Estimación de Parámetros Hidrológicos con HydroROC",
+                subtitle: "Determinación de tiempos característicos para modelamiento de crecidas y caudales máximos",
+                content: `
+                    <div class="space-y-4">
+                        <div class="bg-slate-800/50 p-3.5 rounded-xl border border-slate-700/70">
+                            <h3 class="text-xs font-bold text-brand-400 mb-2.5 flex items-center gap-2">
+                                <i class="fa-solid fa-stopwatch"></i> Fórmulas para Tiempo de Concentración ($T_c$)
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <div class="text-xs font-bold text-white mb-1">Fórmula de Kirpich</div>
+                                    <div class="text-[11px] text-slate-400 mb-1.5">Recomendada para cuencas rurales/agrícolas.</div>
+                                    <div class="font-mono text-xs text-brand-400">
+                                        $$T_c = 0.000325 \\frac{L^{0.77}}{S^{0.385}}$$
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <div class="text-xs font-bold text-white mb-1">Fórmula de Témez</div>
+                                    <div class="text-[11px] text-slate-400 mb-1.5">Estándar ampliamente usado en cuencas naturales.</div>
+                                    <div class="font-mono text-xs text-tealBrand-400">
+                                        $$T_c = 0.3 \\left(\\frac{L}{S^{0.25}}\\right)^{0.76}$$
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+                                    <div class="text-xs font-bold text-white mb-1">Método SCS (Lag Time)</div>
+                                    <div class="text-[11px] text-slate-400 mb-1.5">Incorpora el número de curva (CN) del suelo.</div>
+                                    <div class="font-mono text-xs text-indigo-400">
+                                        $$T_c = \\frac{L^{0.8} (S_{ret} + 1)^{0.7}}{1900 \\sqrt{Y}}$$
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-slate-800/50 p-3.5 rounded-xl border border-slate-700/70">
+                                <h3 class="text-xs font-bold text-white mb-1.5 flex items-center gap-2">
+                                    <i class="fa-solid fa-clock text-amber-400"></i> Tiempo de Retardo ($T_{lag}$)
+                                </h3>
+                                <p class="text-xs text-slate-400 mb-2">
+                                    Tiempo entre el centro de gravedad del hietograma de lluvia y el pico de la avenida de agua. HydroROC realiza este cálculo directo:
+                                </p>
+                                <div class="font-mono text-xs text-amber-300 bg-slate-950 p-2 rounded text-center border border-slate-800">
+                                    $$T_{lag} = 0.6 \\cdot T_c$$
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800/50 p-3.5 rounded-xl border border-slate-700/70">
+                                <h3 class="text-xs font-bold text-white mb-1.5 flex items-center gap-2">
+                                    <i class="fa-solid fa-file-export text-emerald-400"></i> Exportación a HEC-HMS / HEC-RAS
+                                </h3>
+                                <p class="text-xs text-slate-400 mb-2">
+                                    HydroROC compila tablas resumen con todos los parámetros morfométricos e hidrológicos para su rápida importación en modelos hidráulicos.
+                                </p>
+                                <div class="flex gap-2">
+                                    <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded font-mono">Archivos .gpkg / .shp</span>
+                                    <span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-2 py-0.5 rounded font-mono">Reportes CSV</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                id: 6,
+                module: "Módulo 5",
+                title: "Módulo 5: Proyecto Aplicado Final y Control de Calidad",
+                subtitle: "Caso práctico de ingeniería aplicado a un proyecto de infraestructura real",
+                content: `
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                        <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/70 flex flex-col justify-between">
+                            <div>
+                                <span class="px-2 py-0.5 text-[10px] font-bold bg-brand-900 text-brand-300 rounded border border-brand-700 uppercase">Fase 1</span>
+                                <h3 class="font-bold text-slate-100 text-sm mt-2 mb-1">Delimitación e Insumos</h3>
+                                <p class="text-xs text-slate-400">Descarga del DEM de la cuenca asignada, reproyección a la zona UTM correspondiente, eliminación de sumideros y extracción con HydroROC.</p>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-700/60 text-[11px] text-slate-300">
+                                <i class="fa-solid fa-check text-emerald-400"></i> Entregable: Capas Raster y Vectoriales
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/70 flex flex-col justify-between">
+                            <div>
+                                <span class="px-2 py-0.5 text-[10px] font-bold bg-tealBrand-900 text-tealBrand-300 rounded border border-tealBrand-700 uppercase">Fase 2</span>
+                                <h3 class="font-bold text-slate-100 text-sm mt-2 mb-1">Cálculo de Parámetros</h3>
+                                <p class="text-xs text-slate-400">Cálculo automatizado de $A$, $P$, $K_c$, curva hipsométrica, pendiente de Alvord y matriz de tiempos de concentración ($T_c$).</p>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-700/60 text-[11px] text-slate-300">
+                                <i class="fa-solid fa-check text-emerald-400"></i> Entregable: Reporte Morfométrico Excel/CSV
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/70 flex flex-col justify-between">
+                            <div>
+                                <span class="px-2 py-0.5 text-[10px] font-bold bg-amber-900 text-amber-300 rounded border border-amber-700 uppercase">Fase 3</span>
+                                <h3 class="font-bold text-slate-100 text-sm mt-2 mb-1">Auditoría & QA/QC</h3>
+                                <p class="text-xs text-slate-400">Validación con la cartografía nacional oficial (INGEMMET/IGN) y verificación del punto de aforo.</p>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-700/60 text-[11px] text-slate-300">
+                                <i class="fa-solid fa-check text-emerald-400"></i> Entregable: Informe Hidrológico
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Author Footer Banner -->
+                    <div class="mt-5 bg-gradient-to-r from-brand-950 via-slate-900 to-emerald-950 p-4 rounded-xl border border-brand-500/40 flex flex-wrap items-center justify-between gap-4">
+                        <div class="space-y-0.5">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-user-check text-emerald-400"></i> Contacto e Información del Instructor
+                            </h3>
+                            <p class="text-xs text-slate-300">
+                                Ing. Richard Oré Cayetano | Huancavelica - Perú | Tel/WhatsApp: <span class="font-mono text-emerald-400 font-bold">+51 964060080</span>
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <a href="https://orecayetanor.github.io/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs rounded-lg transition shadow-md">
+                                Sitio Web <i class="fa-solid fa-globe ml-1"></i>
+                            </a>
+                            <a href="https://www.paypal.com/ncp/payment/T4U45UF6XYEJ8" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs rounded-lg transition shadow-md flex items-center gap-1.5">
+                                <i class="fa-brands fa-paypal"></i> Donar al Proyecto HydroROC
+                            </a>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        // State Management
+        let currentSlideIndex = 0;
+
+        // DOM Elements
+        const slideContentEl = document.getElementById('slideContent');
+        const currentSlideNumEl = document.getElementById('currentSlideNum');
+        const totalSlidesNumEl = document.getElementById('totalSlidesNum');
+        const progressBarEl = document.getElementById('progressBar');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+        const toggleSidebarBtn = document.getElementById('toggleSidebar');
+        const closeSidebarBtn = document.getElementById('closeSidebar');
+        const tocContainer = document.getElementById('tocContainer');
+
+        // Initialize Total Slides Count
+        totalSlidesNumEl.textContent = slides.length;
+
+        // Render Sidebar Table of Contents
+        function renderTOC() {
+            tocContainer.innerHTML = '';
+            slides.forEach((slide, idx) => {
+                const item = document.createElement('button');
+                item.className = `w-full text-left px-3 py-2.5 rounded-lg text-xs font-medium transition flex items-center justify-between ${
+                    idx === currentSlideIndex 
+                        ? 'bg-brand-600/20 text-brand-400 border border-brand-500/30 font-bold' 
+                        : 'text-slate-300 hover:bg-slate-900 hover:text-white'
+                }`;
+                item.innerHTML = `
+                    <div class="flex items-center gap-2.5 truncate">
+                        <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${
+                            idx === currentSlideIndex ? 'bg-brand-500 text-white' : 'bg-slate-800 text-slate-400'
+                        }">${slide.id}</span>
+                        <span class="truncate">${slide.module}: ${slide.title.split(':')[1] || slide.title}</span>
+                    </div>
+                    ${idx === currentSlideIndex ? '<i class="fa-solid fa-chevron-right text-[10px] text-brand-400"></i>' : ''}
+                `;
+                item.addEventListener('click', () => {
+                    goToSlide(idx);
+                    closeSidebarNav();
+                });
+                tocContainer.appendChild(item);
+            });
+        }
+
+        // Render Active Slide
+        function renderSlide() {
+            const slide = slides[currentSlideIndex];
+            
+            // Re-trigger animation
+            slideContentEl.classList.remove('slide-enter');
+            void slideContentEl.offsetWidth; // Force reflow
+            slideContentEl.classList.add('slide-enter');
+
+            // Render HTML content
+            slideContentEl.innerHTML = `
+                <div class="mb-3 border-b border-slate-800/80 pb-2">
+                    <div class="flex items-center gap-2 text-xs font-bold text-brand-400 uppercase tracking-wider mb-0.5">
+                        <span>${slide.module}</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">${slide.title}</h2>
+                    <p class="text-xs sm:text-sm text-slate-400 font-light">${slide.subtitle}</p>
+                </div>
+                <div class="flex-1 py-1">
+                    ${slide.content}
+                </div>
+            `;
+
+            // Update Header & Controls State
+            currentSlideNumEl.textContent = currentSlideIndex + 1;
+            const progressPercent = ((currentSlideIndex + 1) / slides.length) * 100;
+            progressBarEl.style.width = `${progressPercent}%`;
+
+            btnPrev.disabled = currentSlideIndex === 0;
+            if (currentSlideIndex === slides.length - 1) {
+                btnNext.innerHTML = 'Finalizar <i class="fa-solid fa-check"></i>';
+                btnNext.classList.replace('bg-brand-600', 'bg-emerald-600');
+                btnNext.classList.replace('hover:bg-brand-500', 'hover:bg-emerald-500');
+            } else {
+                btnNext.innerHTML = 'Siguiente <i class="fa-solid fa-arrow-right"></i>';
+                btnNext.classList.replace('bg-emerald-600', 'bg-brand-600');
+                btnNext.classList.replace('hover:bg-emerald-500', 'hover:bg-brand-500');
+            }
+
+            // Update TOC active state
+            renderTOC();
+
+            // Re-render MathJax formulas if available
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        // Navigation Functions
+        function goToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                currentSlideIndex = index;
+                renderSlide();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                goToSlide(currentSlideIndex + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                goToSlide(currentSlideIndex - 1);
+            }
+        }
+
+        // Sidebar Navigation Controls
+        function openSidebarNav() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarBackdrop.classList.remove('hidden');
+        }
+
+        function closeSidebarNav() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarBackdrop.classList.add('hidden');
+        }
+
+        // Fullscreen Toggle
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error en pantalla completa: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Event Listeners
+        btnNext.addEventListener('click', nextSlide);
+        btnPrev.addEventListener('click', prevSlide);
+        toggleSidebarBtn.addEventListener('click', openSidebarNav);
+        closeSidebarBtn.addEventListener('click', closeSidebarNav);
+        sidebarBackdrop.addEventListener('click', closeSidebarNav);
+        document.getElementById('btnFullscreen').addEventListener('click', toggleFullscreen);
+
+        // Keyboard Controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'm' || e.key === 'M') {
+                e.preventDefault();
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    openSidebarNav();
+                } else {
+                    closeSidebarNav();
+                }
+            } else if (e.key === 'Escape') {
+                closeSidebarNav();
+            }
+        });
+
+        // Initialize App on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderSlide();
+        });
+    </script>
+</body>
+</html>
