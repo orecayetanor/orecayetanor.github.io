@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -12,12 +11,11 @@
     <meta name="description"
           content="Richard Oré Cayetano - Ingeniero Civil. Hidrología, hidráulica, GIS, Python, saneamiento, geotecnia, hidrogeología y proyectos de ingeniería.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-
         /* =========================
-           CONFIGURACIÓN GENERAL
+           CONFIGURACIÓN GENERAL (DARK MODE DASHBOARD)
         ========================= */
-
         * {
             margin: 0;
             padding: 0;
@@ -25,2109 +23,1212 @@
         }
 
         :root {
-            --bg-main: #0b132b;        /* Azul muy oscuro / Dark Slate */
+            --bg-main: #0b132b;        /* Azul Slate muy oscuro */
+            --bg-section: #0f172a;     /* Fondo de sección alterno */
             --bg-card: #1c2541;        /* Contenedores y tarjetas */
-            --accent-blue: #00b4d8;    /* Celeste de alto contraste */
-            --accent-green: #06d6a0;   /* Verde para estado/código */
-            --accent-gold: #ffb703;    /* Amarillo/Naranja para llamadas a la acción */
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
+            --bg-card-hover: #232e4e;  /* Estado hover de tarjetas */
+            --accent-blue: #00b4d8;    /* Cían / Celeste brillante */
+            --accent-green: #06d6a0;   /* Verde tech */
+            --accent-purple: #a78bfa;  /* Púrpura suave */
+            --accent-gold: #ffb703;    /* Dorado / Naranja botones */
+            --text-primary: #f8fafc;   /* Texto principal blanco tenue */
+            --text-secondary: #94a3b8; /* Texto secundario gris */
             --border-color: rgba(255, 255, 255, 0.1);
+            --border-hover: rgba(0, 180, 216, 0.4);
         }
-            
 
         html {
             scroll-behavior: smooth;
         }
 
         body {
-
-            font-family: Arial, Helvetica, sans-serif;
-
-            color: #1f2933;
-
-            background: var(--blanco);
-
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-main);
             line-height: 1.6;
-
         }
-
 
         /* =========================
-           CABECERA
+           CABECERA (NAVBAR)
         ========================= */
-
         header {
-
             position: sticky;
-
             top: 0;
-
             z-index: 1000;
-
-            background: rgba(255,255,255,0.97);
-
-            border-bottom: 1px solid var(--borde);
-
+            background: rgba(11, 19, 43, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
         }
-
 
         .header-container {
-
             max-width: 1200px;
-
             margin: auto;
-
-            padding: 17px 25px;
-
+            padding: 12px 25px;
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
-            gap: 25px;
-
+            gap: 20px;
         }
 
+        .brand-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-        .logo {
+        .brand-logo-img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
 
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+.		logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-box {
+            width: 60px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: rgba(0, 180, 216, 1.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.3rem;
+            box-shadow: 0px 0px 5px rgba(100, 280, 216, 0.3);
+        }
+		
+        .logo-text {
             font-size: 1.15rem;
-
-            font-weight: bold;
-
-            color: var(--azul);
-
-            white-space: nowrap;
-
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.3px;
         }
 
+        .logo-text span {
+            color: var(--accent-cyan);
+        }
 
         nav {
-
             display: flex;
-
             align-items: center;
-
-            gap: 24px;
-
+            gap: 20px;
         }
-
 
         nav a {
-
             text-decoration: none;
-
-            color: #374957;
-
+            color: var(--text-secondary);
             font-size: 0.92rem;
-
-            transition: 0.2s;
-
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
-
 
         nav a:hover {
-
-            color: var(--azul-claro);
-
+            color: var(--accent-blue);
         }
-
 
         .language-button {
-
-            border: 1px solid var(--azul);
-
-            background: var(--azul);
-
-            color: white;
-
-            border-radius: 5px;
-
-            padding: 7px 13px;
-
+            border: 1px solid var(--accent-blue);
+            background: rgba(0, 180, 216, 0.15);
+            color: var(--accent-blue);
+            border-radius: 6px;
+            padding: 6px 14px;
             cursor: pointer;
-
             font-size: 0.85rem;
-
+            font-weight: 600;
+            transition: all 0.2s ease;
         }
 
+        .language-button:hover {
+            background: var(--accent-blue);
+            color: #0b132b;
+            box-shadow: 0 0 12px rgba(0, 180, 216, 0.4);
+        }
 
         /* =========================
-           HERO
+           HERO DASHBOARD EN 2 COLUMNAS
         ========================= */
-
         .hero {
-
-            background:
-
-                linear-gradient(
-
-                    135deg,
-
-                    #f4fafc 0%,
-
-                    #ffffff 55%,
-
-                    #eef6fa 100%
-
-                );
-
-            padding: 45px 30px 100px;
-
+            background: radial-gradient(circle at 10% 20%, rgba(0, 180, 216, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(6, 214, 160, 0.05) 0%, transparent 40%),
+                        var(--bg-main);
+            padding: 50px 25px 80px;
         }
-
 
         .hero-container {
-
             max-width: 1200px;
-
             margin: auto;
-
         }
 
+        .hero-split {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 40px;
+            align-items: center;
+        }
 
-        .hero-label {
-
-            color: var(--azul-claro);
-
-            font-size: 0.9rem;
-
-            font-weight: bold;
-
-            letter-spacing: 1.5px;
-
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 180, 216, 0.12);
+            color: var(--accent-blue);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-transform: uppercase;
-
-            margin-bottom: 18px;
-
+            margin-bottom: 20px;
         }
-
 
         .hero h1 {
-
-            color: var(--azul);
-
-            font-size: clamp(2.7rem, 7vw, 5rem);
-
-            line-height: 1.05;
-
-            margin-bottom: 20px;
-
+            color: var(--text-primary);
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 15px;
         }
-
 
         .hero h2 {
-
-            color: #344c5d;
-
-            font-size: clamp(1.25rem, 3vw, 1.8rem);
-
-            font-weight: normal;
-
-            max-width: 850px;
-
-            margin-bottom: 25px;
-
+            color: var(--accent-blue);
+            font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+            font-weight: 400;
+            margin-bottom: 20px;
+            line-height: 1.4;
         }
-
 
         .hero-description {
-
-            max-width: 760px;
-
-            color: var(--gris);
-
-            font-size: 1.05rem;
-
-            margin-bottom: 35px;
-
+            color: var(--text-secondary);
+            font-size: 1.02rem;
+            margin-bottom: 30px;
+            max-width: 650px;
         }
-
 
         .hero-buttons {
-
             display: flex;
-
             flex-wrap: wrap;
-
-            gap: 12px;
-
+            gap: 14px;
         }
-
 
         .button-primary,
         .button-secondary {
-
-            display: inline-block;
-
-            padding: 12px 20px;
-
-            border-radius: 5px;
-
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 8px;
             text-decoration: none;
-
             font-size: 0.95rem;
-
+            font-weight: 600;
+            transition: all 0.25s ease;
         }
-
 
         .button-primary {
-
-            background: var(--azul);
-
-            color: white;
-
+            background: var(--accent-gold);
+            color: #0f172a;
+            box-shadow: 0 4px 14px rgba(255, 183, 3, 0.3);
         }
 
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 183, 3, 0.45);
+        }
 
         .button-secondary {
-
-            border: 1px solid var(--azul);
-
-            color: var(--azul);
-
-            background: white;
-
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
         }
 
-
-        /* =========================
-           SECCIONES
-        ========================= */
-
-        section {
-
-            padding: 80px 25px;
-
+        .button-secondary:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            background: rgba(0, 180, 216, 0.08);
         }
 
-
-        .section-container {
-
-            max-width: 1200px;
-
-            margin: auto;
-
+        /* Visor Interactivo de Imágenes (Derecha) */
+        .hero-visual-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
-
-        .section-title {
-
-            color: var(--azul);
-
-            font-size: 2rem;
-
-            margin-bottom: 12px;
-
-        }
-
-
-        .section-intro {
-
-            color: var(--gris);
-
-            max-width: 760px;
-
-            margin-bottom: 40px;
-
-        }
-
-
-        /* =========================
-           ÁREAS
-        ========================= */
-
-        .areas {
-
-            background: var(--gris-claro);
-
-        }
-
-
-        .areas-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(220px, 1fr));
-
-            gap: 18px;
-
-        }
-
-
-        .area {
-
-            background: white;
-
-            border: 1px solid var(--borde);
-
-            padding: 25px;
-
-            border-radius: 7px;
-
-        }
-
-
-        .area h3 {
-
-            color: var(--azul);
-
-            font-size: 1.05rem;
-
-            margin-bottom: 8px;
-
-        }
-
-
-        .area p {
-
-            color: var(--gris);
-
-            font-size: 0.92rem;
-
-        }
-
-
-        /* ================================
-           PROYECTOS
-        ================================ */
-
-        .projects-section {
-
-            padding: 80px 25px;
-
-        }
-
-
-        .projects-intro {
-
-            max-width: 760px;
-
-            margin: 0 0 45px;
-
-            color: var(--gris);
-
-            line-height: 1.7;
-
-        }
-
-
-        .projects-featured {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 24px;
-
-            margin-bottom: 55px;
-
-        }
-
-
-        .project-card {
-
-            background: #ffffff;
-
-            border: 1px solid #e1e7eb;
-
+        .featured-image-view {
+            width: 100%;
+            height: 240px;
             border-radius: 10px;
-
-            padding: 28px;
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-
-        }
-
-
-        .project-card:hover {
-
-            transform: translateY(-4px);
-
-            box-shadow:
-                0 10px 28px
-                rgba(20, 55, 80, 0.10);
-
-        }
-
-
-        .project-card.featured {
-
-            border-top:
-                4px solid var(--azul-claro);
-
-        }
-
-
-        .project-number {
-
-            display: inline-block;
-
+            overflow: hidden;
+            border: 1px solid var(--border-color);
             margin-bottom: 14px;
-
-            font-size: 0.78rem;
-
-            font-weight: 700;
-
-            letter-spacing: 0.08em;
-
-            color: #6c7b86;
-
+            position: relative;
+            background: #080d1a;
         }
 
-
-        .project-card h3 {
-
-            margin: 0 0 12px;
-
-            color: var(--azul);
-
-            font-size: 1.35rem;
-
-        }
-
-
-        .project-card p {
-
-            margin: 0 0 20px;
-
-            color: #5d6870;
-
-            line-height: 1.65;
-
-        }
-
-
-        .project-link {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 6px;
-
-            color: var(--azul-claro);
-
-            font-weight: 600;
-
-            text-decoration: none;
-
-        }
-
-
-        .project-link:hover {
-
-            text-decoration: underline;
-
-        }
-
-
-        .projects-secondary-title {
-
-            margin: 0 0 25px;
-
-            color: var(--azul);
-
-            font-size: 1.35rem;
-
-        }
-
-
-        .projects-secondary {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 20px;
-
-        }
-
-
-        .project-secondary-card {
-
-            background: #f7f9fa;
-
-            border: 1px solid #e4e9ec;
-
-            border-radius: 8px;
-
-            padding: 24px;
-
-        }
-
-
-        .project-secondary-card h3 {
-
-            margin: 0 0 9px;
-
-            color: #254f67;
-
-            font-size: 1.1rem;
-
-        }
-
-
-        .project-secondary-card p {
-
-            margin: 0;
-
-            color: #626d74;
-
-            line-height: 1.6;
-
-        }
-
-
-        /* =========================
-           EXPERIENCIA
-        ========================= */
-
-        .experience {
-
-            background: var(--gris-claro);
-
-        }
-
-
-        .experience-list {
-
-            max-width: 850px;
-
-        }
-
-
-        .experience-item {
-
-            border-left:
-                3px solid var(--azul-claro);
-
-            padding:
-                5px 0 25px 25px;
-
-            margin-bottom: 10px;
-
-        }
-
-
-        .experience-item h3 {
-
-            color: var(--azul);
-
-            margin-bottom: 6px;
-
-        }
-
-
-        .experience-item p {
-
-            color: var(--gris);
-
-        }
-
-
-        /* =========================
-           PUBLICACIONES
-        ========================= */
-
-        .publications {
-
-            text-align: center;
-
-        }
-
-
-        .publication-box {
-
-            max-width: 850px;
-
-            margin: auto;
-
-            padding: 40px;
-
-            border:
-                1px solid var(--borde);
-
-            border-radius: 8px;
-
-            background: #fbfdfe;
-
-        }
-
-
-        .publication-box h3 {
-
-            color: var(--azul);
-
-            margin-bottom: 12px;
-
-        }
-
-
-        .publication-box p {
-
-            color: var(--gris);
-
-        }
-
-
-        /* =========================
-           PERFIL
-        ========================= */
-
-        .profile {
-
-            background: var(--gris-claro);
-
-        }
-
-
-        .profile-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                2fr 1fr;
-
-            gap: 40px;
-
-            align-items: start;
-
-        }
-
-
-        .profile-text p {
-
-            color: var(--gris);
-
-            margin-bottom: 18px;
-
-        }
-
-
-        .profile-data {
-
-            background: white;
-
-            border:
-                1px solid var(--borde);
-
-            border-radius: 8px;
-
-            padding: 28px;
-
-        }
-
-
-        .profile-data h3 {
-
-            color: var(--azul);
-
-            margin-bottom: 18px;
-
-        }
-
-
-        .profile-data p {
-
-            color: var(--gris);
-
-            margin-bottom: 10px;
-
-        }
-
-
-        .profile-data strong {
-
-            color: #263f50;
-
-        }
-
-
-        /* =========================
-           CONTACTO
-        ========================= */
-
-        .contact {
-
-            background: var(--azul);
-
-            color: white;
-
-        }
-
-
-        .contact .section-title {
-
-            color: white;
-
-        }
-
-
-        .contact .section-intro {
-
-            color: #dbe8ef;
-
-        }
-
-
-        .contact-links {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 12px;
-
-            margin-top: 25px;
-
-        }
-
-
-        .contact-button {
-
-            display: inline-block;
-
-            padding: 11px 18px;
-
-            border:
-                1px solid rgba(255,255,255,0.5);
-
-            border-radius: 5px;
-
-            color: white;
-
-            text-decoration: none;
-
-            transition: 0.2s;
-
-        }
-
-
-        .contact-button:hover {
-
-            background: white;
-
-            color: var(--azul);
-
-        }
-
-
-        .contact-email {
-
-            color: white;
-
-            text-decoration: none;
-
-            font-weight: bold;
-
-        }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-
-            background: #08283f;
-
-            color: #cbd8df;
-
-            text-align: center;
-
-            padding: 25px;
-
-            font-size: 0.85rem;
-
-        }
-
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 900px) {
-
-            .projects-featured {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-            .projects-secondary {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-            .profile-grid {
-
-                grid-template-columns: 1fr;
-
-            }
-
-        }
-
-
-        @media (max-width: 850px) {
-
-            .header-container {
-
-                flex-direction: column;
-
-                align-items: flex-start;
-
-            }
-
-
-            nav {
-
-                width: 100%;
-
-                flex-wrap: wrap;
-
-                gap: 15px;
-
-            }
-
-
-            .hero {
-
-                padding-top: 75px;
-
-                padding-bottom: 70px;
-
-            }
-
-        }
-
-
-        @media (max-width: 500px) {
-
-            .hero h1 {
-
-                font-size: 2.6rem;
-
-            }
-
-
-            section {
-
-                padding: 60px 20px;
-
-            }
-
-
-            .hero {
-
-                padding-left: 20px;
-
-                padding-right: 20px;
-
-            }
-
-
-            .header-container {
-
-                padding-left: 20px;
-
-                padding-right: 20px;
-
-            }
-
-
-            .publication-box {
-
-                padding: 25px;
-
-            }
-
-
-            .project-card,
-            .project-secondary-card {
-
-                padding: 22px;
-
-            }
-
-        }
-        /* =========================
-           GALERÍA SUPERIOR HERO
-        ========================= */
-        .hero-gallery-container {
-            max-width: 1200px;
-            margin: 20 auto 0 auto;
-            padding: 0 25px;
+        .featured-image-view img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
         }
 
         .hero-gallery {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
+            gap: 10px;
         }
 
         .gallery-item {
-            width: 100%;
-            height: 90px;
-            border-radius: 8px;
-            border: 1px solid var(--borde);
+            height: 60px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
             overflow: hidden;
-            background: var(--gris-claro);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            opacity: 0.7;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(11, 53, 88, 0.1);
+        .gallery-item:hover, .gallery-item.active {
+            opacity: 1;
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 180, 216, 0.3);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
-        @media (max-width: 768px) {
-            .hero-gallery {
-                grid-template-columns: repeat(3, 1fr);
+        /* =========================
+           SECCIONES GENERALES
+        ========================= */
+        section {
+            padding: 80px 25px;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            color: var(--text-primary);
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        .section-intro {
+            color: var(--text-secondary);
+            max-width: 760px;
+            margin-bottom: 40px;
+            font-size: 1.02rem;
+        }
+
+        /* =========================
+           ÁREAS DE TRABAJO
+        ========================= */
+        .areas {
+            background: var(--bg-section);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .area {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .area:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .area h3 {
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .area p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+        }
+
+        /* =========================
+           PROYECTOS DESTACADOS
+        ========================= */
+        .projects-section {
+            background: var(--bg-main);
+        }
+
+        .projects-featured {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 12px 30px rgba(0, 180, 216, 0.15);
+        }
+
+        .project-card.featured {
+            border-top: 4px solid var(--accent-blue);
+        }
+
+        .project-number {
+            display: inline-block;
+            margin-bottom: 14px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent-blue);
+        }
+
+        .project-card h3 {
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            margin-bottom: 22px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-blue);
+            font-weight: 600;
+            font-size: 0.92rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .project-link:hover {
+            color: #38bdf8;
+            transform: translateX(3px);
+        }
+
+        .resource-box {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.92rem;
+            text-decoration: none;
+            color: var(--text-secondary);
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .resource-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--accent-blue);
+        }
+
+        .resource-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+        }
+
+        .projects-secondary-title {
+            margin: 40px 0 25px;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+        }
+
+        .projects-secondary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .project-secondary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 24px;
+        }
+
+        .project-secondary-card h3 {
+            margin-bottom: 9px;
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+        }
+
+        .project-secondary-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+        }
+
+        /* =========================
+           EXPERIENCIA & PERFIL
+        ========================= */
+        .experience, .profile {
+            background: var(--bg-section);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .experience-item {
+            border-left: 3px solid var(--accent-blue);
+            padding: 5px 0 25px 25px;
+            margin-bottom: 10px;
+        }
+
+        .experience-item h3 {
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .experience-item p {
+            color: var(--text-secondary);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .profile-text p {
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+        }
+
+        .profile-data {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .profile-data h3 {
+            color: var(--accent-blue);
+            margin-bottom: 18px;
+        }
+
+        .profile-data p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .profile-data strong {
+            color: var(--text-primary);
+        }
+
+        /* =========================
+           PUBLICACIONES
+        ========================= */
+        .publications {
+            background: var(--bg-main);
+            text-align: center;
+        }
+
+        .publication-box {
+            max-width: 850px;
+            margin: auto;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--bg-card);
+        }
+
+        .publication-box h3 {
+            color: var(--accent-blue);
+            margin-bottom: 12px;
+        }
+
+        .publication-box p {
+            color: var(--text-secondary);
+        }
+
+        /* =========================
+           CONTACTO & FOOTER
+        ========================= */
+        .contact {
+            background: var(--bg-section);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 25px;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            background: var(--bg-card);
+            transition: all 0.25s ease;
+        }
+
+        .contact-button:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 180, 216, 0.2);
+        }
+
+        .contact-email {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: #060b17;
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 25px;
+            font-size: 0.88rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .hero-split, .profile-grid, .projects-secondary {
+                grid-template-columns: 1fr;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero-gallery {
-                grid-template-columns: repeat(2, 1fr);
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav {
+                width: 100%;
+                flex-wrap: wrap;
+                gap: 14px;
             }
         }
     </style>
 
 </head>
 
-
 <body>
-
 
 <!-- =========================
      CABECERA
 ========================= -->
-
 <header>
-
     <div class="header-container">
-        <div class="gallery-item" style="width: 150px; height: 80px; margin-top: -20px; position: relative; z-index: 2;">
-            <img src="Imagenes/LogoRYB.svg" alt="Proyecto Destacado">
+        
+        <div class="brand-logo-group">
+            <img src="Imagenes/LogoRYB.svg" alt="RYB Ingenieros" class="brand-logo-img">
         </div>
-        <div class="logo">
-            Richard Oré Cayetano
-        </div>
-
+		<a href="#" class="logo-area" style="text-decoration: none !important; border-bottom: none !important; outline: none;">
+			<div class="logo-box" style="background-color: #00b4d8; padding: 6px 14px; border-radius: 6px; display: inline-flex; align-items: center; text-decoration: none;">
+				<span style="color: white; font-weight: bold; font-size: 1.2rem; text-decoration: none;">ROC</span>
+			</div>
+		</a>
 
         <nav>
+            <a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="#areas" data-es="Áreas" data-en="Areas">Áreas</a>
+            <a href="#proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a>
+            <a href="#experiencia" data-es="Experiencia" data-en="Experience">Experiencia</a>
+            <a href="#publicaciones" data-es="Publicaciones" data-en="Publications">Publicaciones</a>
+            <a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a>
 
-            <a href="#inicio"
-               data-es="Inicio"
-               data-en="Home">
-                Inicio
-            </a>
-
-
-            <a href="#areas"
-               data-es="Áreas"
-               data-en="Areas">
-                Áreas
-            </a>
-
-
-            <a href="#proyectos"
-               data-es="Proyectos"
-               data-en="Projects">
-                Proyectos
-            </a>
-
-
-            <a href="#experiencia"
-               data-es="Experiencia"
-               data-en="Experience">
-                Experiencia
-            </a>
-
-
-            <a href="#publicaciones"
-               data-es="Publicaciones"
-               data-en="Publications">
-                Publicaciones
-            </a>
-
-
-            <a href="#contacto"
-               data-es="Contacto"
-               data-en="Contact">
-                Contacto
-            </a>
-
-
-            <button
-                class="language-button"
-                id="languageButton">
-                EN
-            </button>
-
+            <button class="language-button" id="languageButton">EN</button>
         </nav>
 
     </div>
-
 </header>
 
 <main>
 
-
 <!-- =========================
-     INICIO
+     INICIO / HERO DASHBOARD
 ========================= -->
-
 <section class="hero" id="inicio">
-
     <div class="hero-container">
-    <!-- =========================
-     GALERÍA DE IMÁGENES HERO
-    ========================= -->
-        <div class="hero-gallery-container">
-            <div class="hero-gallery">
-                <div class="gallery-item" style="width: 250px; height: 140px; margin-top: -20px; position: relative; z-index: 2;">
-                    <img src="Imagenes/Hidrologia01.png" alt="Proyecto Destacado">
+        
+        <div class="hero-split">
+            
+            <!-- Columna Izquierda -->
+            <div class="hero-text-col">
+                <div class="tech-badge" data-es="INGENIERO CIVIL · PERÚ" data-en="CIVIL ENGINEER · PERU">
+                    <i class="fa-solid fa-certificate"></i> Ingeniero Civil · Perú
                 </div>
-                <div class="gallery-item" style="width: 250px; height: 140px; margin-top: -20px; position: relative; z-index: 2;">
-                    <img src="Imagenes/Hidrologia02.png" alt="Proyecto Destacado">
-                </div>
-                <div class="gallery-item" style="width: 250px; height: 140px; margin-top: -20px; position: relative; z-index: 2;">
-                    <img src="Imagenes/Hidrologia03.png" alt="Proyecto Destacado">
-                </div>
-                <div class="gallery-item" style="width: 250px; height: 140px; margin-top: -20px; position: relative; z-index: 2;">
-                    <img src="Imagenes/Hidrologia04.png" alt="Proyecto Destacado">
-                </div>
-                <div class="gallery-item" style="width: 250px; height: 140px; margin-top: -20px; position: relative; z-index: 2;">
-                    <img src="Imagenes/Hidrologia05.png" alt="Proyecto Destacado">
+
+                <h1>Richard Oré Cayetano</h1>
+
+                <h2 data-es="Ingeniería Civil aplicada a los recursos hídricos, el territorio y la construcción."
+                    data-en="Civil engineering applied to water resources, spatial analysis and construction.">
+                    Ingeniería Civil aplicada a los recursos hídricos, el territorio y la construcción.
+                </h2>
+
+                <p class="hero-description"
+                   data-es="Desarrollo proyectos, herramientas y conocimiento técnico integrando hidrología, hidráulica, GIS, programación, saneamiento, geotecnia, hidrogeología y experiencia de campo."
+                   data-en="I develop engineering projects, tools and technical knowledge integrating hydrology, hydraulics, GIS, programming, water and sanitation, geotechnical engineering, hydrogeology and field experience.">
+                    Desarrollo proyectos, herramientas y conocimiento técnico integrando hidrología, hidráulica, GIS, programación, saneamiento, geotecnia, hidrogeología y experiencia de campo.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#proyectos" class="button-primary" data-es="Ver proyectos" data-en="View projects">
+                        <i class="fa-solid fa-layer-group"></i> Ver proyectos
+                    </a>
+
+                    <a href="#publicaciones" class="button-secondary" data-es="Conocimiento y publicaciones" data-en="Knowledge and publications">
+                        <i class="fa-solid fa-book"></i> Conocimiento y publicaciones
+                    </a>
                 </div>
             </div>
-        </div>
 
-        <div class="hero-label"
-             data-es="Ingeniero Civil · Perú"
-             data-en="Civil Engineer · Peru">
+            <!-- Columna Derecha: Visor de Galería -->
+            <div class="hero-visual-col">
+                <div class="hero-visual-card">
+                    <div class="featured-image-view">
+                        <img id="mainHeroView" src="Imagenes/Hidrologia01.png" alt="Proyecto Hidrológico Destacado">
+                    </div>
 
-            Ingeniero Civil · Perú
-
-        </div>
-
-
-        <h1>
-            Richard Oré Cayetano
-        </h1>
-
-
-        <h2
-            data-es="Ingeniería Civil aplicada a los recursos hídricos, el territorio y la construcción."
-            data-en="Civil engineering applied to water resources, spatial analysis and construction.">
-
-            Ingeniería Civil aplicada a los recursos hídricos,
-            el territorio y la construcción.
-
-        </h2>
-
-
-        <p class="hero-description"
-           data-es="Desarrollo proyectos, herramientas y conocimiento técnico integrando hidrología, hidráulica, GIS, programación, saneamiento, geotecnia, hidrogeología y experiencia de campo."
-           data-en="I develop engineering projects, tools and technical knowledge integrating hydrology, hydraulics, GIS, programming, water and sanitation, geotechnical engineering, hydrogeology and field experience.">
-
-            Desarrollo proyectos, herramientas y conocimiento técnico
-            integrando hidrología, hidráulica, GIS, programación,
-            saneamiento, geotecnia, hidrogeología y experiencia de campo.
-
-        </p>
-
-
-        <div class="hero-buttons">
-
-            <a href="#proyectos"
-               class="button-primary"
-               data-es="Ver proyectos"
-               data-en="View projects">
-
-                Ver proyectos
-
-            </a>
-
-
-            <a href="#publicaciones"
-               class="button-secondary"
-               data-es="Conocimiento y publicaciones"
-               data-en="Knowledge and publications">
-
-                Conocimiento y publicaciones
-
-            </a>
+                    <div class="hero-gallery">
+                        <div class="gallery-item active" onclick="changeHeroImage('Imagenes/Hidrologia01.png', this)">
+                            <img src="Imagenes/Hidrologia01.png" alt="Hidrología 01">
+                        </div>
+                        <div class="gallery-item" onclick="changeHeroImage('Imagenes/Hidrologia02.png', this)">
+                            <img src="Imagenes/Hidrologia02.png" alt="Hidrología 02">
+                        </div>
+                        <div class="gallery-item" onclick="changeHeroImage('Imagenes/Hidrologia03.png', this)">
+                            <img src="Imagenes/Hidrologia03.png" alt="Hidrología 03">
+                        </div>
+                        <div class="gallery-item" onclick="changeHeroImage('Imagenes/Hidrologia04.png', this)">
+                            <img src="Imagenes/Hidrologia04.png" alt="Hidrología 04">
+                        </div>
+                        <div class="gallery-item" onclick="changeHeroImage('Imagenes/Hidrologia05.png', this)">
+                            <img src="Imagenes/Hidrologia05.png" alt="Hidrología 05">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
     </div>
-
 </section>
 
-
 <!-- =========================
-     ÁREAS
+     ÁREAS DE TRABAJO
 ========================= -->
-
 <section class="areas" id="areas">
-
     <div class="section-container">
 
-        <h2 class="section-title"
-            data-es="Áreas de trabajo"
-            data-en="Areas of work">
-
+        <h2 class="section-title" data-es="Áreas de trabajo" data-en="Areas of work">
             Áreas de trabajo
-
         </h2>
-
 
         <p class="section-intro"
            data-es="Una combinación de ingeniería, análisis de datos, herramientas digitales y experiencia en proyectos y obras."
            data-en="A combination of engineering, data analysis, digital tools and experience in projects and construction.">
-
-            Una combinación de ingeniería, análisis de datos,
-            herramientas digitales y experiencia en proyectos y obras.
-
+            Una combinación de ingeniería, análisis de datos, herramientas digitales y experiencia en proyectos y obras.
         </p>
-
 
         <div class="areas-grid">
 
-
             <div class="area">
-
                 <h3>Hidrología</h3>
-
-                <p
-                    data-es="Análisis hidrológico, precipitaciones, caudales, cuencas y máximas avenidas."
-                    data-en="Hydrological analysis, precipitation, discharge, watersheds and flood estimation.">
-
-                    Análisis hidrológico, precipitaciones, caudales,
-                    cuencas y máximas avenidas.
-
+                <p data-es="Análisis hidrológico, precipitaciones, caudales, cuencas y máximas avenidas."
+                   data-en="Hydrological analysis, precipitation, discharge, watersheds and flood estimation.">
+                    Análisis hidrológico, precipitaciones, caudales, cuencas y máximas avenidas.
                 </p>
-
             </div>
 
-
             <div class="area">
-
                 <h3>Hidráulica</h3>
-
-                <p
-                    data-es="Canales, ríos, estructuras hidráulicas y modelamiento."
-                    data-en="Channels, rivers, hydraulic structures and modeling.">
-
+                <p data-es="Canales, ríos, estructuras hidráulicas y modelamiento."
+                   data-en="Channels, rivers, hydraulic structures and modeling.">
                     Canales, ríos, estructuras hidráulicas y modelamiento.
-
                 </p>
-
             </div>
 
-
             <div class="area">
-
                 <h3>GIS / QGIS</h3>
-
-                <p
-                    data-es="Análisis espacial, modelos digitales de elevación y procesamiento territorial."
-                    data-en="Spatial analysis, digital elevation models and geospatial processing.">
-
-                    Análisis espacial, modelos digitales de elevación
-                    y procesamiento territorial.
-
+                <p data-es="Análisis espacial, modelos digitales de elevación y procesamiento territorial."
+                   data-en="Spatial analysis, digital elevation models and geospatial processing.">
+                    Análisis espacial, modelos digitales de elevación y procesamiento territorial.
                 </p>
-
             </div>
 
-
             <div class="area">
-
                 <h3>Python</h3>
-
-                <p
-                    data-es="Automatización, análisis de datos y desarrollo de herramientas para ingeniería."
-                    data-en="Automation, data analysis and engineering tool development.">
-
-                    Automatización, análisis de datos y desarrollo
-                    de herramientas para ingeniería.
-
+                <p data-es="Automatización, análisis de datos y desarrollo de herramientas para ingeniería."
+                   data-en="Automation, data analysis and engineering tool development.">
+                    Automatización, análisis de datos y desarrollo de herramientas para ingeniería.
                 </p>
-
             </div>
 
-
             <div class="area">
-
                 <h3>Hidrogeología</h3>
-
-                <p
-                    data-es="Acuíferos, pozos, bombeo y análisis del flujo subterráneo."
-                    data-en="Aquifers, wells, pumping tests and groundwater flow analysis.">
-
+                <p data-es="Acuíferos, pozos, bombeo y análisis del flujo subterráneo."
+                   data-en="Aquifers, wells, pumping tests and groundwater flow analysis.">
                     Acuíferos, pozos, bombeo y análisis del flujo subterráneo.
-
                 </p>
-
             </div>
 
-
             <div class="area">
-
                 <h3>Geotecnia</h3>
-
-                <p
-                    data-es="Mecánica de suelos, caracterización y problemas geotécnicos."
-                    data-en="Soil mechanics, characterization and geotechnical problems.">
-
-                    Mecánica de suelos, caracterización
-                    y problemas geotécnicos.
-
+                <p data-es="Mecánica de suelos, caracterización y problemas geotécnicos."
+                   data-en="Soil mechanics, characterization and geotechnical problems.">
+                    Mecánica de suelos, caracterización y problemas geotécnicos.
                 </p>
-
             </div>
 
-
             <div class="area">
-
                 <h3>Saneamiento</h3>
-
-                <p
-                    data-es="Sistemas de agua potable, alcantarillado y proyectos de saneamiento."
-                    data-en="Water supply, sewerage and sanitation projects.">
-
-                    Sistemas de agua potable, alcantarillado
-                    y proyectos de saneamiento.
-
+                <p data-es="Sistemas de agua potable, alcantarillado y proyectos de saneamiento."
+                   data-en="Water supply, sewerage and sanitation projects.">
+                    Sistemas de agua potable, alcantarillado y proyectos de saneamiento.
                 </p>
-
             </div>
 
-
             <div class="area">
-
                 <h3>Construcción</h3>
-
-                <p
-                    data-es="Expedientes técnicos, concreto y experiencia en ejecución de obras."
-                    data-en="Technical projects, concrete and construction field experience.">
-
-                    Expedientes técnicos, concreto y experiencia
-                    en ejecución de obras.
-
+                <p data-es="Expedientes técnicos, concreto y experiencia en ejecución de obras."
+                   data-en="Technical projects, concrete and construction field experience.">
+                    Expedientes técnicos, concreto y experiencia en ejecución de obras.
                 </p>
-
             </div>
 
         </div>
 
     </div>
-
 </section>
-
 
 <!-- =========================
      PROYECTOS
 ========================= -->
-
 <section class="projects-section" id="proyectos">
-
     <div class="section-container">
 
-
-        <h2 class="section-title"
-            data-es="Proyectos"
-            data-en="Projects">
-
+        <h2 class="section-title" data-es="Proyectos" data-en="Projects">
             Proyectos
-
         </h2>
 
-
-        <p class="projects-intro"
+        <p class="section-intro"
            data-es="Desarrollo de herramientas, publicaciones y soluciones aplicadas a la ingeniería civil, los recursos hídricos y el territorio."
            data-en="Development of tools, publications and applied solutions for civil engineering, water resources and spatial analysis.">
-
-            Desarrollo de herramientas, publicaciones y soluciones
-            aplicadas a la ingeniería civil, los recursos hídricos
-            y el territorio.
-
+            Desarrollo de herramientas, publicaciones y soluciones aplicadas a la ingeniería civil, los recursos hídricos y el territorio.
         </p>
-
 
         <div class="projects-featured">
 
-
             <!-- HYDROROC -->
             <article class="project-card featured">
-                <span class="project-number">
-                    01 · SOFTWARE
-                </span>
+                <div>
+                    <span class="project-number">01 · SOFTWARE</span>
+                    <h3>HydroROC</h3>
+                    <p data-es="Plugin para QGIS orientado al análisis hidrológico y al procesamiento de información espacial para estudios de recursos hídricos."
+                       data-en="QGIS plugin focused on hydrological analysis and spatial data processing for water resources studies.">
+                        Plugin para QGIS orientado al análisis hidrológico y al procesamiento de información espacial para estudios de recursos hídricos.
+                    </p>
 
-                <h3>
-                    HydroROC
-                </h3>
-
-                <p
-                    data-es="Plugin para QGIS orientado al análisis hidrológico y al procesamiento de información espacial para estudios de recursos hídricos."
-                    data-en="QGIS plugin focused on hydrological analysis and spatial data processing for water resources studies.">
-                    Plugin para QGIS orientado al análisis hidrológico
-                    y al procesamiento de información espacial para
-                    estudios de recursos hídricos.
-                </p>
-
-                <!-- BOTONES PRINCIPALES (Alineados uno al lado del otro) -->
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px; margin-bottom: 20px;">
-                    <a
-                        href="https://github.com/orecayetanor/HydroROC"
-                        class="project-link"
-                        target="_blank"
-                        rel="noopener"
-                        data-es="Ver proyecto →"
-                        data-en="View project →">
-                        Ver proyecto →
-                    </a>
-                    
-                    <a
-                        href="curso.html"
-                        class="project-link"
-                        data-es="Ver manual y curso →"
-                        data-en="View manual & course →">
-                        Ver manual y curso →
-                    </a>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+                        <a href="https://github.com/orecayetanor/HydroROC" class="project-link" target="_blank" rel="noopener" data-es="Ver proyecto →" data-en="View project →">
+                            Ver proyecto →
+                        </a>
+                        <a href="curso.html" class="project-link" data-es="Ver manual y curso →" data-en="View manual & course →">
+                            Ver manual y curso →
+                        </a>
+                    </div>
                 </div>
 
-                <!-- SECCIÓN DE RECURSOS ADICIONALES (Estilo Dashboard con iconos de colores) -->
-                <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 15px; display: flex; flex-direction: column; gap: 14px;">
-                    
-                    <!-- ENLACE A CURSO -->
-                    <a href="curso.html" class="project-link" style="display: flex; items-center: center; gap: 12px; font-size: 0.95rem; text-decoration: none; border-bottom: none; padding: 0;">
-                        <div style="background-color: rgba(14, 165, 233, 0.15); color: #38bdf8; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; shrink-0;">
-                            <i class="fa-solid fa-map-location-dot" style="font-size: 1.1rem;"></i>
+                <div class="resource-box">
+                    <a href="curso.html" class="resource-item">
+                        <div class="resource-icon" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8;">
+                            <i class="fa-solid fa-graduation-cap"></i>
                         </div>
-                        <span data-es="Curso" data-en="Course" style="align-self: center;">Curso </span>
+                        <span data-es="Curso" data-en="Course">Curso</span>
                     </a>
 
-                    <!-- ENLACE A MANUAL PDF -->
-                    <a href="Documentos/Manual_HydroROC_QGIS_ES.pdf" class="project-link" style="display: flex; items-center: center; gap: 12px; font-size: 0.95rem; text-decoration: none; border-bottom: none; padding: 0;">
-                        <div style="background-color: rgba(14, 165, 233, 0.15); color: #38bdf8; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; shrink-0;">
-                            <i class="fa-solid fa-map-location-dot" style="font-size: 1.1rem;"></i>
+                    <a href="Documentos/Manual_HydroROC_QGIS_ES.pdf" class="resource-item" target="_blank">
+                        <div class="resource-icon" style="background: rgba(14, 165, 233, 0.15); color: #38bdf8;">
+                            <i class="fa-solid fa-file-pdf"></i>
                         </div>
-                        <span data-es="Manual" data-en="Books & Info" style="align-self: center;">Manual</span>
+                        <span data-es="Manual" data-en="Books & Info">Manual</span>
                     </a>
 
-                    <!-- ENLACE A VIDEOS -->
-                    <a href="https://www.youtube.com/@richardorecayetano1878" class="project-link" style="display: flex; items-center: center; gap: 12px; font-size: 0.95rem; text-decoration: none; border-bottom: none; padding: 0;">
-                        <div style="background-color: rgba(20, 184, 166, 0.15); color: #2dd4bf; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; shrink-0;">
-                            <i class="fa-solid fa-water" style="font-size: 1.1rem;"></i>
+                    <a href="https://www.youtube.com/@richardorecayetano1878" class="resource-item" target="_blank">
+                        <div class="resource-icon" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">
+                            <i class="fa-brands fa-youtube"></i>
                         </div>
-                        <span data-es="Videos disponibles" data-en="Available videos" style="align-self: center;">Videos disponibles</span>
+                        <span data-es="Videos disponibles" data-en="Available videos">Videos disponibles</span>
                     </a>
 
-                    <!-- ENLACE A CODIGO PYTHON HydroROC -->
-                    <a href="https://github.com/orecayetanor/HydroROC" class="project-link" style="display: flex; items-center: center; gap: 12px; font-size: 0.95rem; text-decoration: none; border-bottom: none; padding: 0;">
-                        <div style="background-color: rgba(139, 92, 246, 0.15); color: #a78bfa; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; shrink-0;">
-                            <i class="fa-solid fa-crosshairs" style="font-size: 1.1rem;"></i>
+                    <a href="https://github.com/orecayetanor/HydroROC" class="resource-item" target="_blank">
+                        <div class="resource-icon" style="background: rgba(167, 139, 250, 0.15); color: #a78bfa;">
+                            <i class="fa-brands fa-github"></i>
                         </div>
-                        <span data-es="Código HydroROC" data-en="HydroROC Code" style="align-self: center;">Código HydroROC</span>
+                        <span data-es="Código HydroROC" data-en="HydroROC Code">Código HydroROC</span>
                     </a>
-
                 </div>
             </article>
-
 
             <!-- AFORROC -->
-
             <article class="project-card featured">
+                <div>
+                    <span class="project-number">02 · APLICACIÓN</span>
+                    <h3>AforROC</h3>
+                    <p data-es="Aplicación Android para el procesamiento de mediciones de campo y cálculo de caudales mediante el método de secciones."
+                       data-en="Android application for processing field measurements and calculating river discharge using the section method.">
+                        Aplicación Android para el procesamiento de mediciones de campo y cálculo de caudales mediante el método de secciones.
+                    </p>
+                </div>
 
-                <span class="project-number">
-
-                    02 · APLICACIÓN
-
-                </span>
-
-
-                <h3>
-                    AforROC
-                </h3>
-
-
-                <p
-                    data-es="Aplicación Android para el procesamiento de mediciones de campo y cálculo de caudales mediante el método de secciones."
-                    data-en="Android application for processing field measurements and calculating river discharge using the section method.">
-
-                    Aplicación Android para el procesamiento de mediciones
-                    de campo y cálculo de caudales mediante el método
-                    de secciones.
-
-                </p>
-
-
-                <a
-                    href="#contacto"
-                    class="project-link"
-                    data-es="Conocer más →"
-                    data-en="Learn more →">
-
+                <a href="#contacto" class="project-link" data-es="Conocer más →" data-en="Learn more →">
                     Conocer más →
-
                 </a>
-
             </article>
 
-
             <!-- HIDROLIBRO -->
-
             <article class="project-card featured">
+                <div>
+                    <span class="project-number">03 · PUBLICACIÓN</span>
+                    <h3>HidroLibro</h3>
+                    <p data-es="Colección de libros y manuales técnicos orientados a la formación y aplicación práctica de la ingeniería hidráulica e hidrológica."
+                       data-en="Collection of technical books and manuals focused on practical training and application in hydrology and hydraulic engineering.">
+                        Colección de libros y manuales técnicos orientados a la formación y aplicación práctica de la ingeniería hidráulica e hidrológica.
+                    </p>
+                </div>
 
-                <span class="project-number">
-
-                    03 · PUBLICACIÓN
-
-                </span>
-
-
-                <h3>
-                    HidroLibro
-                </h3>
-
-
-                <p
-                    data-es="Colección de libros y manuales técnicos orientados a la formación y aplicación práctica de la ingeniería hidráulica e hidrológica."
-                    data-en="Collection of technical books and manuals focused on practical training and application in hydrology and hydraulic engineering.">
-
-                    Colección de libros y manuales técnicos orientados
-                    a la formación y aplicación práctica de la ingeniería
-                    hidráulica e hidrológica.
-
-                </p>
-
-
-                <a
-                    href="#publicaciones"
-                    class="project-link"
-                    data-es="Ver publicaciones →"
-                    data-en="View publications →">
-
+                <a href="#publicaciones" class="project-link" data-es="Ver publicaciones →" data-en="View publications →">
                     Ver publicaciones →
-
                 </a>
-
             </article>
 
         </div>
 
-
-        <h3 class="projects-secondary-title"
-            data-es="Proyectos y experiencia aplicada"
-            data-en="Projects and applied experience">
-
+        <h3 class="projects-secondary-title" data-es="Proyectos y experiencia aplicada" data-en="Projects and applied experience">
             Proyectos y experiencia aplicada
-
         </h3>
-
 
         <div class="projects-secondary">
 
-
             <article class="project-secondary-card">
-
-                <h3
-                    data-es="Modelamiento hidrológico"
-                    data-en="Hydrological modeling">
-
-                    Modelamiento hidrológico
-
-                </h3>
-
-
-                <p
-                    data-es="Aplicación de QGIS, HEC-HMS y HEC-RAS para el análisis de cuencas, transformación lluvia–escorrentía, tránsito de avenidas y evaluación de inundaciones."
-                    data-en="Application of QGIS, HEC-HMS and HEC-RAS for watershed analysis, rainfall-runoff transformation, flood routing and flood assessment.">
-
-                    Aplicación de QGIS, HEC-HMS y HEC-RAS para el análisis
-                    de cuencas, transformación lluvia–escorrentía, tránsito
-                    de avenidas y evaluación de inundaciones.
-
+                <h3 data-es="Modelamiento hidrológico" data-en="Hydrological modeling">Modelamiento hidrológico</h3>
+                <p data-es="Aplicación de QGIS, HEC-HMS y HEC-RAS para el análisis de cuencas, transformación lluvia–escorrentía, tránsito de avenidas y evaluación de inundaciones."
+                   data-en="Application of QGIS, HEC-HMS and HEC-RAS for watershed analysis, rainfall-runoff transformation, flood routing and flood assessment.">
+                    Aplicación de QGIS, HEC-HMS y HEC-RAS para el análisis de cuencas, transformación lluvia–escorrentía, tránsito de avenidas y evaluación de inundaciones.
                 </p>
-
             </article>
 
-
             <article class="project-secondary-card">
-
-                <h3
-                    data-es="Saneamiento y expedientes técnicos"
-                    data-en="Sanitation and technical project files">
-
-                    Saneamiento y expedientes técnicos
-
-                </h3>
-
-
-                <p
-                    data-es="Desarrollo de proyectos y documentación técnica relacionados con sistemas de agua, alcantarillado, tratamiento de aguas residuales y servicios de saneamiento."
-                    data-en="Development of projects and technical documentation related to water supply, sewerage, wastewater treatment and sanitation services.">
-
-                    Desarrollo de proyectos y documentación técnica
-                    relacionados con sistemas de agua, alcantarillado,
-                    tratamiento de aguas residuales y servicios
-                    de saneamiento.
-
+                <h3 data-es="Saneamiento y expedientes técnicos" data-en="Sanitation and technical project files">Saneamiento y expedientes técnicos</h3>
+                <p data-es="Desarrollo de proyectos y documentación técnica relacionados con sistemas de agua, alcantarillado, tratamiento de aguas residuales y servicios de saneamiento."
+                   data-en="Development of projects and technical documentation related to water supply, sewerage, wastewater treatment and sanitation services.">
+                    Desarrollo de proyectos y documentación técnica relacionados con sistemas de agua, alcantarillado, tratamiento de aguas residuales y servicios de saneamiento.
                 </p>
-
             </article>
 
-
             <article class="project-secondary-card">
-
-                <h3
-                    data-es="Hidráulica y medición de caudales"
-                    data-en="Hydraulics and discharge measurement">
-
-                    Hidráulica y medición de caudales
-
-                </h3>
-
-
-                <p
-                    data-es="Trabajo con métodos de aforo, estructuras hidráulicas, mediciones de campo y procesamiento de información para la estimación de caudales."
-                    data-en="Work with discharge measurement methods, hydraulic structures, field measurements and data processing for flow estimation.">
-
-                    Trabajo con métodos de aforo, estructuras hidráulicas,
-                    mediciones de campo y procesamiento de información
-                    para la estimación de caudales.
-
+                <h3 data-es="Hidráulica y medición de caudales" data-en="Hydraulics and discharge measurement">Hidráulica y medición de caudales</h3>
+                <p data-es="Trabajo con métodos de aforo, estructuras hidráulicas, mediciones de campo y procesamiento de información para la estimación de caudales."
+                   data-en="Work with discharge measurement methods, hydraulic structures, field measurements and data processing for flow estimation.">
+                    Trabajo con métodos de aforo, estructuras hidráulicas, mediciones de campo y procesamiento de información para la estimación de caudales.
                 </p>
-
             </article>
 
-
             <article class="project-secondary-card">
-
-                <h3
-                    data-es="Construcción y obra"
-                    data-en="Construction and field work">
-
-                    Construcción y obra
-
-                </h3>
-
-
-                <p
-                    data-es="Experiencia vinculada a la ejecución y seguimiento de trabajos de ingeniería, control de campo y aplicación de criterios técnicos en obra."
-                    data-en="Experience related to engineering works, field monitoring, construction control and practical application of technical criteria.">
-
-                    Experiencia vinculada a la ejecución y seguimiento
-                    de trabajos de ingeniería, control de campo y aplicación
-                    de criterios técnicos en obra.
-
+                <h3 data-es="Construcción y obra" data-en="Construction and field work">Construcción y obra</h3>
+                <p data-es="Experiencia vinculada a la ejecución y seguimiento de trabajos de ingeniería, control de campo y aplicación de criterios técnicos en obra."
+                   data-en="Experience related to engineering works, field monitoring, construction control and practical application of technical criteria.">
+                    Experiencia vinculada a la ejecución y seguimiento de trabajos de ingeniería, control de campo y aplicación de criterios técnicos en obra.
                 </p>
-
             </article>
 
         </div>
 
     </div>
-
 </section>
-
 
 <!-- =========================
      EXPERIENCIA
 ========================= -->
-
 <section class="experience" id="experiencia">
-
     <div class="section-container">
 
-
-        <h2 class="section-title"
-            data-es="Experiencia"
-            data-en="Experience">
-
+        <h2 class="section-title" data-es="Experiencia" data-en="Experience">
             Experiencia
-
         </h2>
-
 
         <p class="section-intro"
            data-es="Experiencia combinando trabajo técnico, desarrollo de proyectos y experiencia directa en campo."
            data-en="Experience combining technical work, project development and direct field experience.">
-
-            Experiencia combinando trabajo técnico,
-            desarrollo de proyectos y experiencia directa en campo.
-
+            Experiencia combinando trabajo técnico, desarrollo de proyectos y experiencia directa en campo.
         </p>
-
 
         <div class="experience-list">
 
-
             <div class="experience-item">
-
-                <h3
-                    data-es="Proyectos y expedientes técnicos"
-                    data-en="Engineering projects and technical documents">
-
+                <h3 data-es="Proyectos y expedientes técnicos" data-en="Engineering projects and technical documents">
                     Proyectos y expedientes técnicos
-
                 </h3>
-
-
-                <p
-                    data-es="Participación en la elaboración y desarrollo de proyectos de ingeniería y expedientes técnicos, incluyendo proyectos de saneamiento."
-                    data-en="Participation in the preparation and development of engineering projects and technical documents, including water and sanitation projects.">
-
-                    Participación en la elaboración y desarrollo
-                    de proyectos de ingeniería y expedientes técnicos,
-                    incluyendo proyectos de saneamiento.
-
+                <p data-es="Participación en la elaboración y desarrollo de proyectos de ingeniería y expedientes técnicos, incluyendo proyectos de saneamiento."
+                   data-en="Participation in the preparation and development of engineering projects and technical documents, including water and sanitation projects.">
+                    Participación en la elaboración y desarrollo de proyectos de ingeniería y expedientes técnicos, incluyendo proyectos de saneamiento.
                 </p>
-
             </div>
 
-
             <div class="experience-item">
-
-                <h3
-                    data-es="Ejecución de obra"
-                    data-en="Construction">
-
+                <h3 data-es="Ejecución de obra" data-en="Construction">
                     Ejecución de obra
-
                 </h3>
-
-
-                <p
-                    data-es="Experiencia vinculada a la ejecución de proyectos de ingeniería y al trabajo directo en campo."
-                    data-en="Experience in engineering project construction and direct field work.">
-
-                    Experiencia vinculada a la ejecución
-                    de proyectos de ingeniería y al trabajo
-                    directo en campo.
-
+                <p data-es="Experiencia vinculada a la ejecución de proyectos de ingeniería y al trabajo directo en campo."
+                   data-en="Experience in engineering project construction and direct field work.">
+                    Experiencia vinculada a la ejecución de proyectos de ingeniería y al trabajo directo en campo.
                 </p>
-
             </div>
 
-
             <div class="experience-item">
-
-                <h3
-                    data-es="Desarrollo tecnológico"
-                    data-en="Technology development">
-
+                <h3 data-es="Desarrollo tecnológico" data-en="Technology development">
                     Desarrollo tecnológico
-
                 </h3>
-
-
-                <p
-                    data-es="Desarrollo de herramientas propias para apoyar procesos de análisis, cálculo y trabajo de ingeniería."
-                    data-en="Development of custom tools to support engineering analysis, calculations and workflows.">
-
-                    Desarrollo de herramientas propias para apoyar
-                    procesos de análisis, cálculo y trabajo de ingeniería.
-
+                <p data-es="Desarrollo de herramientas propias para apoyar procesos de análisis, cálculo y trabajo de ingeniería."
+                   data-en="Development of custom tools to support engineering analysis, calculations and workflows.">
+                    Desarrollo de herramientas propias para apoyar procesos de análisis, cálculo y trabajo de ingeniería.
                 </p>
-
             </div>
 
         </div>
 
     </div>
-
 </section>
-
 
 <!-- =========================
      PERFIL
 ========================= -->
-
 <section class="profile" id="perfil">
-
     <div class="section-container">
 
-
-        <h2 class="section-title"
-            data-es="Sobre mí"
-            data-en="About me">
-
+        <h2 class="section-title" data-es="Sobre mí" data-en="About me">
             Sobre mí
-
         </h2>
-
 
         <div class="profile-grid">
 
-
             <div class="profile-text">
-
-                <p
-                    data-es="Soy Ingeniero Civil peruano y desarrollo mi trabajo principalmente en el ámbito de los recursos hídricos, la ingeniería y las herramientas digitales aplicadas."
-                    data-en="I am a Peruvian Civil Engineer working mainly in water resources, engineering and applied digital tools.">
-
-                    Soy Ingeniero Civil peruano y desarrollo mi trabajo
-                    principalmente en el ámbito de los recursos hídricos,
-                    la ingeniería y las herramientas digitales aplicadas.
-
+                <p data-es="Soy Ingeniero Civil peruano y desarrollo mi trabajo principalmente en el ámbito de los recursos hídricos, la ingeniería y las herramientas digitales aplicadas."
+                   data-en="I am a Peruvian Civil Engineer working mainly in water resources, engineering and applied digital tools.">
+                    Soy Ingeniero Civil peruano y desarrollo mi trabajo principalmente en el ámbito de los recursos hídricos, la ingeniería y las herramientas digitales aplicadas.
                 </p>
 
-
-                <p
-                    data-es="Mi interés está en integrar conocimientos de ingeniería con GIS, programación y herramientas de análisis para resolver problemas reales de proyectos y obras."
-                    data-en="My interest is in integrating engineering knowledge with GIS, programming and analytical tools to solve real problems in projects and construction.">
-
-                    Mi interés está en integrar conocimientos de ingeniería
-                    con GIS, programación y herramientas de análisis para
-                    resolver problemas reales de proyectos y obras.
-
+                <p data-es="Mi interés está en integrar conocimientos de ingeniería con GIS, programación y herramientas de análisis para resolver problemas reales de proyectos y obras."
+                   data-en="My interest is in integrating engineering knowledge with GIS, programming and analytical tools to solve real problems in projects and construction.">
+                    Mi interés está en integrar conocimientos de ingeniería con GIS, programación y herramientas de análisis para resolver problemas reales de proyectos y obras.
                 </p>
 
-
-                <p
-                    data-es="También desarrollo material técnico, libros y herramientas propias con la finalidad de compartir conocimientos y facilitar el trabajo de otros profesionales y estudiantes."
-                    data-en="I also develop technical material, books and custom tools to share knowledge and facilitate the work of professionals and students.">
-
-                    También desarrollo material técnico, libros y herramientas
-                    propias con la finalidad de compartir conocimientos y
-                    facilitar el trabajo de otros profesionales y estudiantes.
-
+                <p data-es="También desarrollo material técnico, libros y herramientas propias con la finalidad de compartir conocimientos y facilitar el trabajo de otros profesionales y estudiantes."
+                   data-en="I also develop technical material, books and custom tools to share knowledge and facilitate the work of professionals and students.">
+                    También desarrollo material técnico, libros y herramientas propias con la finalidad de compartir conocimientos y facilitar el trabajo de otros profesionales y estudiantes.
                 </p>
-
             </div>
 
-
             <div class="profile-data">
+                <h3 data-es="Datos" data-en="Profile">Datos</h3>
 
-                <h3
-                    data-es="Datos"
-                    data-en="Profile">
-
-                    Datos
-
-                </h3>
-
-
-                <p>
-
-                    <strong
-                        data-es="Profesión:"
-                        data-en="Profession:">
-
-                        Profesión:
-
-                    </strong>
-
-                    Ingeniero Civil
-
-                </p>
-
-
-                <p>
-
-                    <strong
-                        data-es="Nacionalidad:"
-                        data-en="Nationality:">
-
-                        Nacionalidad:
-
-                    </strong>
-
-                    Peruano
-
-                </p>
-
-
-                <p>
-
-                    <strong
-                        data-es="País:"
-                        data-en="Country:">
-
-                        País:
-
-                    </strong>
-
-                    Perú
-
-                </p>
-
-
-                <p>
-
-                    <strong
-                        data-es="Especialidad:"
-                        data-en="Main fields:">
-
-                        Especialidad:
-
-                    </strong>
-
-                    Hidrología · Hidráulica · GIS
-
-                </p>
-
-
-                <p>
-
-                    <strong
-                        data-es="Base:"
-                        data-en="Based in:">
-
-                        Base:
-
-                    </strong>
-
-                    Perú
-
-                </p>
-
+                <p><strong data-es="Profesión:" data-en="Profession:">Profesión:</strong> Ingeniero Civil</p>
+                <p><strong data-es="Nacionalidad:" data-en="Nationality:">Nacionalidad:</strong> Peruano</p>
+                <p><strong data-es="País:" data-en="Country:">País:</strong> Perú</p>
+                <p><strong data-es="Especialidad:" data-en="Main fields:">Especialidad:</strong> Hidrología · Hidráulica · GIS</p>
+                <p><strong data-es="Base:" data-en="Based in:">Base:</strong> Perú</p>
             </div>
 
         </div>
 
     </div>
-
 </section>
-
 
 <!-- =========================
      PUBLICACIONES
 ========================= -->
-
 <section class="publications" id="publicaciones">
-
     <div class="section-container">
 
-
-        <h2 class="section-title"
-            data-es="Conocimiento y publicaciones"
-            data-en="Knowledge and publications">
-
+        <h2 class="section-title" data-es="Conocimiento y publicaciones" data-en="Knowledge and publications">
             Conocimiento y publicaciones
-
         </h2>
 
-
         <div class="publication-box">
-
-
-            <h3
-                data-es="HidroLibro y recursos técnicos"
-                data-en="HidroLibro and technical resources">
-
+            <h3 data-es="HidroLibro y recursos técnicos" data-en="HidroLibro and technical resources">
                 HidroLibro y recursos técnicos
-
             </h3>
 
-
-            <p
-                data-es="Libros, manuales, ejercicios, herramientas y material técnico desarrollado a partir de la experiencia en ingeniería."
-                data-en="Books, manuals, exercises, tools and technical resources developed from engineering experience.">
-
-                Libros, manuales, ejercicios, herramientas y material
-                técnico desarrollado a partir de la experiencia en ingeniería.
-
+            <p data-es="Libros, manuales, ejercicios, herramientas y material técnico desarrollado a partir de la experiencia en ingeniería."
+               data-en="Books, manuals, exercises, tools and technical resources developed from engineering experience.">
+                Libros, manuales, ejercicios, herramientas y material técnico desarrollado a partir de la experiencia en ingeniería.
             </p>
-
         </div>
 
     </div>
-
 </section>
-
 
 <!-- =========================
      CONTACTO
 ========================= -->
-
 <section class="contact" id="contacto">
-
     <div class="section-container">
 
-
-        <h2 class="section-title"
-            data-es="Contacto"
-            data-en="Contact">
-
+        <h2 class="section-title" data-es="Contacto" data-en="Contact">
             Contacto
-
         </h2>
-
 
         <p class="section-intro"
            data-es="Para consultas, colaboración, proyectos o intercambio de conocimiento."
            data-en="For inquiries, collaboration, engineering projects or knowledge exchange.">
-
-            Para consultas, colaboración, proyectos o intercambio
-            de conocimiento.
-
+            Para consultas, colaboración, proyectos o intercambio de conocimiento.
         </p>
 
-
-        <a class="contact-email"
-           href="mailto:orecayetano.r@gmail.com">
-
+        <a class="contact-email" href="mailto:orecayetano.r@gmail.com">
             orecayetano.r@gmail.com
-
         </a>
-
 
         <div class="contact-links">
 
-
             <!-- WHATSAPP -->
-
-            <a
-                class="contact-button"
-                href="https://wa.me/51964060080"
-                target="_blank"
-                rel="noopener"
-                data-es="WhatsApp"
-                data-en="WhatsApp">
-
-                WhatsApp
-
+            <a class="contact-button" href="https://wa.me/51964060080" target="_blank" rel="noopener" data-es="WhatsApp" data-en="WhatsApp">
+                <i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> WhatsApp
             </a>
-
 
             <!-- YOUTUBE -->
-
-            <a
-                class="contact-button"
-                href="https://www.youtube.com/@richardorecayetano1878"
-                target="_blank"
-                rel="noopener"
-                data-es="Canal de YouTube"
-                data-en="YouTube Channel">
-
-                Canal de YouTube
-
+            <a class="contact-button" href="https://www.youtube.com/@richardorecayetano1878" target="_blank" rel="noopener" data-es="Canal de YouTube" data-en="YouTube Channel">
+                <i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Canal de YouTube
             </a>
 
-
             <!-- GITHUB -->
-
-            <a
-                class="contact-button"
-                href="https://github.com/orecayetanor"
-                target="_blank"
-                rel="noopener"
-                data-es="GitHub"
-                data-en="GitHub">
-
-                GitHub
-
+            <a class="contact-button" href="https://github.com/orecayetanor" target="_blank" rel="noopener" data-es="GitHub" data-en="GitHub">
+                <i class="fa-brands fa-github"></i> GitHub
             </a>
 
         </div>
 
     </div>
-
 </section>
 
-
 </main>
-
 
 <!-- =========================
      PIE DE PÁGINA
 ========================= -->
-
 <footer>
-
-    <span
-        data-es="© 2026 Richard Oré Cayetano · Ingeniería Civil · Perú"
-        data-en="© 2026 Richard Oré Cayetano · Civil Engineering · Peru">
-
+    <span data-es="© 2026 Richard Oré Cayetano · Ingeniería Civil · Perú"
+          data-en="© 2026 Richard Oré Cayetano · Civil Engineering · Peru">
         © 2026 Richard Oré Cayetano · Ingeniería Civil · Perú
-
     </span>
-
 </footer>
 
-
 <!-- =========================
-     CAMBIO DE IDIOMA
+     SCRIPTS INTERACTIVOS
 ========================= -->
-
 <script>
+    // Visor dinámico de la Galería Hero
+    function changeHeroImage(imgSrc, element) {
+        document.getElementById('mainHeroView').src = imgSrc;
+        document.querySelectorAll('.gallery-item').forEach(item => item.classList.remove('active'));
+        element.classList.add('active');
+    }
 
+    // Sistema de Cambio de Idioma (ES / EN)
     let currentLanguage = "es";
+    const languageButton = document.getElementById("languageButton");
 
+    languageButton.addEventListener("click", function () {
+        currentLanguage = currentLanguage === "es" ? "en" : "es";
 
-    const languageButton =
-        document.getElementById("languageButton");
+        document.querySelectorAll("[data-es][data-en]").forEach(function (element) {
+            element.textContent = element.getAttribute("data-" + currentLanguage);
+        });
 
-
-    languageButton.addEventListener(
-        "click",
-        function () {
-
-
-            currentLanguage =
-                currentLanguage === "es"
-                    ? "en"
-                    : "es";
-
-
-            document
-                .querySelectorAll(
-                    "[data-es][data-en]"
-                )
-                .forEach(
-                    function (element) {
-
-
-                        element.textContent =
-                            element.getAttribute(
-                                "data-" +
-                                currentLanguage
-                            );
-
-                    }
-                );
-
-
-            document.documentElement.lang =
-                currentLanguage;
-
-
-            languageButton.textContent =
-                currentLanguage === "es"
-                    ? "EN"
-                    : "ES";
-
-        }
-    );
-
+        document.documentElement.lang = currentLanguage;
+        languageButton.textContent = currentLanguage === "es" ? "EN" : "ES";
+    });
 </script>
-
 
 </body>
 
 </html>
-```
