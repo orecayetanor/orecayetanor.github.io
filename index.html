@@ -678,18 +678,40 @@
 <!-- =========================
      CABECERA
 ========================= -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso HydroROC & Delimitación Hidrológica - QGIS</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- MathJax para fórmulas matemáticas -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .slide-content { display: none; }
+    .slide-content.active { display: block; }
+  </style>
+</head>
 <header>
     <div class="header-container">
-         
-        <div class="gallery-item" style="width: 150px; height: 80px; margin-top: -20px; position: relative; z-index: 2;">
-            <img src="Imagenes/LogoRYB.png" alt="Proyecto Destacado">
-        </div>
+		<img src="Imagenes/LogoRYB.svg" alt="RYB Ingenieros S.A.C." style="height: 65px; width: auto;">&nbsp;
+		<img src="Imagenes/LogoSOLVE.svg" alt="RYB Ingenieros S.A.C." style="height: 60px; width: auto;">&nbsp;
+		<img src="Imagenes/LogoINNOVA.svg" alt="RYB Ingenieros S.A.C." style="height: 65px; width: auto;">&nbsp;
+		<!-- <div class="brand-logo-group" style="background: rgba(255, 255, 255, 0.9); padding: 6px 12px; border-radius: 8px;"> -->
+			<!-- <img src="Imagenes/Innova.png" alt="RYB Ingenieros S.A.C." style="height: 30px; width: auto;">&nbsp; -->
+		<!-- </div> -->
 
-        <a href="#" class="logo-area" style="text-decoration: none !important; border-bottom: none !important; outline: none;">
-            <div class="logo-box" style="background-color: #00b4d8; padding: 6px 14px; border-radius: 6px; display: inline-flex; align-items: center; text-decoration: none;">
-                <span style="color: white; font-weight: bold; font-size: 1.2rem; text-decoration: none;">ROC</span>
-            </div>
-        </a>
+        <!-- <a href="#" class="logo-area" style="text-decoration: none !important; border-bottom: none !important; outline: none;"> -->
+            <!-- <div class="logo-box" style="background-color: #00b4d8; padding: 6px 14px; border-radius: 6px; display: inline-flex; align-items: center; text-decoration: none;"> -->
+                <!-- <span style="color: white; font-weight: bold; font-size: 1.2rem; text-decoration: none;">ROC</span> -->
+            <!-- </div> -->
+        <!-- </a> -->
 
         <nav>
             <a href="#inicio">Inicio</a>
@@ -699,7 +721,21 @@
             <a href="#publicaciones">Publicaciones</a>
             <a href="#contacto">Contacto</a>
         </nav>
-
+    <!-- Enlaces Rápidos Header -->
+    <div class="hidden lg:flex items-center gap-3 text-xs">
+      <a href="https://orecayetanor.github.io/" target="_blank" class="px-3 py-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1.5">
+        <i class="fa-solid fa-globe text-cyan-400"></i> Web
+      </a>
+      <a href="https://www.youtube.com/@richardorecayetano1878" target="_blank" class="px-3 py-1.5 rounded-md bg-red-600/20 border border-red-500/30 hover:bg-red-600/30 text-red-400 transition flex items-center gap-1.5">
+        <i class="fa-brands fa-youtube"></i> YouTube
+      </a>
+      <a href="https://plugins.qgis.org/plugins/HydroROC/" target="_blank" class="px-3 py-1.5 rounded-md bg-emerald-600/20 border border-emerald-500/30 hover:bg-emerald-600/30 text-emerald-400 transition flex items-center gap-1.5">
+        <i class="fa-solid fa-plug"></i> Plugin QGIS
+      </a>
+      <a href="https://www.paypal.com/ncp/payment/T4U45UF6XYEJ8" target="_blank" class="px-3 py-1.5 rounded-md bg-amber-500/20 border border-amber-500/40 hover:bg-amber-500/30 text-amber-300 transition flex items-center gap-1.5 font-medium">
+        <i class="fa-brands fa-paypal"></i> Donar al Proyecto
+      </a>
+    </div>
     </div>
 </header>
 
@@ -824,7 +860,7 @@
             </div>
 
             <div class="area">
-                <h3>Geotecnia</h3>
+                <h3>Geotecnia</h3>index.html
                 <p>
                     Mecánica de suelos, caracterización y problemas geotécnicos.
                 </p>
